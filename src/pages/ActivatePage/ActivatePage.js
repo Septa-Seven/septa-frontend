@@ -5,11 +5,11 @@ import {postToken} from "../../redux/actions/actions";
 
 export const ActivatePage = () => {
     const dispatch = useDispatch()
-    const {token} = useParams();
+    const params = useParams();
 
     useEffect(() => {
-        dispatch(postToken(token));
-    }, [dispatch, token])
+        dispatch(postToken(params));
+    }, [dispatch, params])
 
     return (
         <Fragment>

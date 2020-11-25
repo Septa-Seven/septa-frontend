@@ -21,8 +21,9 @@ export const API_authUser = async ({username, password}) => {
   });
 }
 
-export const API_postToken = async ({token}) => {
-  return await API.post('auth/jwt/create/', {
-    'token' : token,
+export const API_postToken = async ({token, uid}) => {
+  return await API.post('auth/users/activation/', {
+    'uid': uid,
+    'token': token,
   });
 }

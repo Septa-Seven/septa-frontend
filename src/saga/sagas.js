@@ -40,6 +40,7 @@ export function* watchLogin() {
 function* workerPostToken({payload}) {
     try {
         const data = yield call(API_postToken, payload);
+        console.log(data);
         yield put(putUser(data))
     }
 
