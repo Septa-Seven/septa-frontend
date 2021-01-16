@@ -1,0 +1,1 @@
+export { ReditectHOC } from './ReditectHOC';

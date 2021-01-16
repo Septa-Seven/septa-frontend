@@ -2,6 +2,8 @@ import {HomePage} from './HomePage';
 import {LoginPage} from './LoginPage';
 import {RegisterPage} from './RegisterPage';
 import {ActivatePage} from './ActivatePage';
+import {RegisterSuccess} from './RegisterSuccess';
+
 
 
 export {
@@ -9,4 +11,5 @@ export {
     LoginPage,
     RegisterPage,
     ActivatePage,
+    RegisterSuccess,
 };

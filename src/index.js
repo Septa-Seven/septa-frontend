@@ -1,33 +1,23 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {BrowserRouter} from "react-router-dom";
+import Container from "@material-ui/core/Container";
 
-import {applyMiddleware, compose, createStore} from "redux";
 import {Provider} from 'react-redux';
-import {rootReducer} from "./redux/rootReducer";
-
-import createSagaMiddleware from 'redux-saga';
-
+import {store} from './redux';
 import {Routing} from "./routing";
-import {Navbar} from "./core/Navbar";
+import {Navbar} from "./core/components/Navbar/Navbar";
 import './index.css';
-import {rootSaga} from "./saga/rootSaga";
-
-const sagaMiddleware = createSagaMiddleware();
-const store = createStore(rootReducer, compose(applyMiddleware(sagaMiddleware),window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()))
-
-sagaMiddleware.run(rootSaga);
-
+import {ReditectHOC} from "./core/components/RedirectHOC";
 
 ReactDOM.render(
     <React.StrictMode>
         <Provider store={store}>
             <BrowserRouter>
                 <Navbar />
-                <div className='container'>
-                    <Routing />
-                </div>
+                <Container maxWidth="lg">
+                    <ReditectHOC />
+                </Container>
             </BrowserRouter>
         </Provider>
     </React.StrictMode>,

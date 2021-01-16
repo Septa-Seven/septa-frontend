@@ -1,35 +1,38 @@
 import React, {Fragment} from 'react';
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {registerUser} from "../../redux/actions/actions";
 import {useForm} from "react-hook-form";
+import Box from "@material-ui/core/Box";
+import TextField from "@material-ui/core/TextField";
+import Button from "@material-ui/core/Button";
+import {registerPageStyle} from "./RegisterPage.style";
 
 export const RegisterPage = () => {
+    const classes = registerPageStyle();
 
-
-    const {register, handleSubmit} = useForm();
-    const dispatch = useDispatch()
-    const onSubmit = (data) => dispatch(registerUser(data))
+    const {register, handleSubmit, errors} = useForm();
+    const dispatch = useDispatch();
+    const onSubmit = (data) => dispatch(registerUser(data));
+    const errorAuth = useSelector(state => state.auth.isAuthenticated);
 
     return (
-        <Fragment>
+    <Box className={classes.container}>
+        <form onSubmit={handleSubmit(onSubmit)} className={classes.form} >
             <h1>Регистрация</h1>
-
-            <form>
-                <div className="form-group">
-                    <label>Имя пользователя</label>
-                    <input type="text" className="form-control" name='username' id="text" aria-describedby="emailHelp" ref={register}/>
-                </div>
-                <div className="form-group">
-                    <label>Электронная почта</label>
-                    <input type="email" className="form-control" name='email' id="email" aria-describedby="emailHelp" ref={register}/>
-                </div>
-                <div className="form-group">
-                    <label>Пароль</label>
-                    <input type="password" className="form-control" name='password' id="password" ref={register}/>
-                </div>
-                <button type="submit" className="btn btn-primary" onClick={handleSubmit(onSubmit)}>Submit</button>
-            </form>
-        </Fragment>
+            <Box>
+                <TextField id="outlined-basic" label="Логин" variant="outlined" name='username' className={classes.input} ref={register({required: true})} error={errorAuth === false}/>
+            </Box>
+            <Box>
+                <TextField id="outlined-basic" label="Эл. почта" variant="outlined" name='email' className={classes.input} ref={register({required: true})}  error={errorAuth === false}/>
+            </Box>
+            <Box>
+                <TextField id="outlined-basic" label="Пароль" variant="outlined" name='password' className={classes.input} ref={register({required: true})}  error={errorAuth === false}/>
+            </Box>
+            <Button variant="contained" color="primary" size="large" type='submit'>
+                Зарегистрироваться
+            </Button>
+        </form>
+    </Box>
     )
 }
 

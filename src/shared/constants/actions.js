@@ -1,4 +1,20 @@
 export const PUT_USER = 'PUT_USER';
+
+export const USER_LOADING = 'USER_LOADING';
+export const USER_LOADED = 'USER_LOADED';
+
 export const LOGIN_USER = 'LOGIN_USER';
+export const LOGIN_USER_FAIL = 'LOGIN_USER_FAIL';
+export const LOGIN_USER_SUCCESS = 'LOGIN_USER_SUCCESS';
+export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
 export const REGISTER_USER = 'REGISTER_USER';
+export const REGISTER_USER_FAIL = 'REGISTER_USER_FAIL';
+export const REGISTER_USER_SUCCESS = 'REGISTER_USER_SUCCESS';
 export const POST_TOKEN = 'POST_TOKEN';
+
+export const LOAD_NEWS = 'LOAD_NEWS';
+export const LOAD_NEWS_FAIL = 'LOAD_NEWS_FAIL';
+export const LOAD_NEWS_SUCCESS = 'LOAD_NEWS_SUCCESS';
+
+export const GET_ERRORS = 'GET_ERRORS';
+export const CLEAR_ERRORS = 'GET_ERRORS';

@@ -1,13 +1,9 @@
-import axios from "axios";
+import {Api} from './httpClient';
+import {API_URLS} from "../../shared/constants";
 
-const API = axios.create({
-  baseURL: "http://92.255.175.28:8000/",
-  responseType: "json"
-});
 
 export const API_registerUser = async ({username, password, email}) => {
-  console.log(username, password, email)
-  return await API.post('auth/users/', {
+  return await Api.post(API_URLS.register, {
     'username': username,
     'password': password,
     'email': email,
@@ -15,15 +11,19 @@ export const API_registerUser = async ({username, password, email}) => {
 }
 
 export const API_authUser = async ({username, password}) => {
-  return await API.post('auth/jwt/create/', {
+  return await Api.post(API_URLS.login, {
     'username': username,
     'password': password,
   });
 }
 
 export const API_postToken = async ({token, uid}) => {
-  return await API.post('auth/users/activation/', {
+  return await Api.post(API_URLS.mailActivation, {
     'uid': uid,
     'token': token,
   });
+}
+
+export const API_getNews = async () => {
+  return await Api.get(API_URLS.news);
 }
