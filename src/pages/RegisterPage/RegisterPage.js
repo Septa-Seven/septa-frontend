@@ -20,13 +20,13 @@ export const RegisterPage = () => {
         <form onSubmit={handleSubmit(onSubmit)} className={classes.form} >
             <h1>Регистрация</h1>
             <Box>
-                <TextField id="outlined-basic" label="Логин" variant="outlined" name='username' className={classes.input} ref={register({required: true})} error={errorAuth === false}/>
+                <TextField id="outlined-basic" label="Логин" variant="outlined" name='username' className={classes.input} />
             </Box>
             <Box>
-                <TextField id="outlined-basic" label="Эл. почта" variant="outlined" name='email' className={classes.input} ref={register({required: true})}  error={errorAuth === false}/>
+                <TextField id="outlined-basic" label="Эл. почта" variant="outlined" name='email' className={classes.input} />
             </Box>
             <Box>
-                <TextField id="outlined-basic" label="Пароль" variant="outlined" name='password' className={classes.input} ref={register({required: true})}  error={errorAuth === false}/>
+                <TextField id="outlined-basic" label="Пароль" variant="outlined" name='password' className={classes.input} />
             </Box>
             <Button variant="contained" color="primary" size="large" type='submit'>
                 Зарегистрироваться

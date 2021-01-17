@@ -1,0 +1,1 @@
+export {articleDispatchTable} from './articleDispatchTable'

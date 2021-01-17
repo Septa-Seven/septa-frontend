@@ -38,6 +38,7 @@ export const authReducer = (state = initialState, action) => {
                 isAuthenticated: true,
 
             }
+
         case REGISTER_USER_SUCCESS:
             return {
                 ...state,

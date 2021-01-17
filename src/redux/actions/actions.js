@@ -67,6 +67,7 @@ export const registerUserFail = (data) => {
 }
 
 export const registerUser = (data) => {
+    console.log(data);
     return {
         type: REGISTER_USER,
         payload: data,

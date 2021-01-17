@@ -1,6 +1,7 @@
 import React, {Fragment, useEffect} from 'react';
 import {useDispatch} from "react-redux";
 import {loadNews} from "../../redux/actions/actions";
+import {Article} from "./components/Article";
 
 export const HomePage = () => {
     const dispatch = useDispatch()
@@ -11,7 +12,7 @@ export const HomePage = () => {
 
     return (
         <Fragment>
-            <h1>Домашняя</h1>
+            <Article />
         </Fragment>
     )
 }

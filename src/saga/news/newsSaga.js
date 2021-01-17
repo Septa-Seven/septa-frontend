@@ -9,7 +9,8 @@ import {LOAD_NEWS} from "../../shared/constants";
 function* workerGetNews({payload}) {
     try {
         const data = yield call(API_getNews, payload);
-        yield put(loadNewsSuccess(data))
+        const result = data.data.results;
+        yield put(loadNewsSuccess(result))
     }
 
     catch (error) {
