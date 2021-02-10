@@ -3,7 +3,7 @@ import {LoginPage} from './LoginPage';
 import {RegisterPage} from './RegisterPage';
 import {ActivatePage} from './ActivatePage';
 import {RegisterSuccess} from './RegisterSuccess';
-
+import {Article} from './Article';
 
 
 export {
@@ -12,4 +12,5 @@ export {
     RegisterPage,
     ActivatePage,
     RegisterSuccess,
+    Article,
 };

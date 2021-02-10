@@ -1,4 +1,4 @@
 export {authReducer} from './authReducer';
 export {errorReducer} from './errorReducer';
-export {newsReducer} from './newsReducer';
+export {articlesReducer} from './articlesReducer';
 export {redirectReducer} from './redirectReducer';

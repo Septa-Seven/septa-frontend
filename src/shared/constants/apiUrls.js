@@ -3,5 +3,6 @@ export const API_URLS = {
     login: 'auth/jwt/create/',
     mailActivation: 'auth/users/activation/',
 
-    news: '/api/news/',
+    articles: '/api/articles/',
+    article: '/api/articles/:id/',
 }

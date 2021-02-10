@@ -63,7 +63,7 @@ function failureRequestIntecepter(error) {
 }
 
 const config = {
-  baseURL: "http://92.255.165.238:8000/",
+  baseURL: "http://92.255.175.28:80/",
   responseType: "json",
   headers: {
      'Content-type': 'application/json',

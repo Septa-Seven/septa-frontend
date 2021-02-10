@@ -1,18 +1,22 @@
 import React, {Fragment, useEffect} from 'react';
-import {useDispatch} from "react-redux";
-import {loadNews} from "../../redux/actions/actions";
-import {Article} from "./components/Article";
+import {useDispatch, useSelector} from "react-redux";
+import {loadArticles} from "../../redux/actions/actions";
+import {Article} from "./components";
 
 export const HomePage = () => {
     const dispatch = useDispatch()
+    const articles = useSelector(state => state.article.articles);
 
     useEffect(() => {
-        dispatch(loadNews());
-    }, [])
+        dispatch(loadArticles());
+    }, [loadArticles])
 
     return (
         <Fragment>
-            <Article />
+            {articles.map((article) => (
+                 <Article article={article} key={article.id} />
+                )
+            )}
         </Fragment>
     )
 }

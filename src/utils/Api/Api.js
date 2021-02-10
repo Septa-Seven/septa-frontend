@@ -24,6 +24,12 @@ export const API_postToken = async ({token, uid}) => {
   });
 }
 
-export const API_getNews = async () => {
-  return await Api.get(API_URLS.news);
+export const API_getArticle = async (id) => {
+  return await Api.get(API_URLS.article.replace(':id', id));
 }
+
+export const API_getArticles = async () => {
+  return await Api.get(API_URLS.articles);
+}
+
+

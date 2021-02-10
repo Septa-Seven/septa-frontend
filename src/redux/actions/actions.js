@@ -1,7 +1,7 @@
 import {
-    LOAD_NEWS,
-    LOAD_NEWS_FAIL,
-    LOAD_NEWS_SUCCESS,
+    LOAD_ARTICLE,
+    LOAD_ARTICLE_FAIL,
+    LOAD_ARTICLE_SUCCESS, LOAD_ARTICLES, LOAD_ARTICLES_FAIL, LOAD_ARTICLES_SUCCESS,
     LOGIN_USER, LOGIN_USER_FAIL,
     LOGIN_USER_SUCCESS,
     POST_TOKEN,
@@ -67,30 +67,50 @@ export const registerUserFail = (data) => {
 }
 
 export const registerUser = (data) => {
-    console.log(data);
     return {
         type: REGISTER_USER,
         payload: data,
     };
 }
 
-export const loadNewsSuccess = (data) => {
+export const loadArticleSuccess = (data) => {
     return {
-        type: LOAD_NEWS_SUCCESS,
+        type: LOAD_ARTICLE_SUCCESS,
         payload: data,
     };
 }
 
-export const loadNewsFail = (data) => {
+export const loadArticleFail = (data) => {
     return {
-        type: LOAD_NEWS_FAIL,
+        type: LOAD_ARTICLE_FAIL,
         payload: data,
     };
 }
 
-export const loadNews = () => {
+export const loadArticle = (data) => {
     return {
-        type: LOAD_NEWS,
+        type: LOAD_ARTICLE,
+        payload: data,
+    };
+}
+
+export const loadArticlesSuccess = (data) => {
+    return {
+        type: LOAD_ARTICLES_SUCCESS,
+        payload: data,
+    };
+}
+
+export const loadArticlesFail = (data) => {
+    return {
+        type: LOAD_ARTICLES_FAIL,
+        payload: data,
+    };
+}
+
+export const loadArticles = () => {
+    return {
+        type: LOAD_ARTICLES,
     };
 }
 

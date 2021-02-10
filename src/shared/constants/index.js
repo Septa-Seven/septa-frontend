@@ -9,4 +9,5 @@ export const ROUTING = {
     REGISTER_PAGE: '/register',
     ACTIVATE_PAGE: '/activate',
     REGISTER_SUCCESS: '/register-success',
+    NEWS: '/news'
 }

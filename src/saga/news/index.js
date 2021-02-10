@@ -1,1 +1,0 @@
-export {watchGetNews} from './newsSaga';

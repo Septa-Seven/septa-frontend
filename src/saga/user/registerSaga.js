@@ -5,7 +5,6 @@ import {REGISTER_USER, ROUTING} from "../../shared/constants";
 
 function* workerRegister({payload}) {
     try {
-        console.log(payload);
         const data = yield call(API_registerUser, payload);
         yield put(registerUserSuccess(data))
         yield put(redirect(ROUTING.REGISTER_SUCCESS));
