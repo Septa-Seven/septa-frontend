@@ -8,6 +8,7 @@ import {Comment, CommentForm} from './components';
 export const Article = () => {
     const dispatch = useDispatch()
     const {id} = useParams();
+    console.log('asdasd');
 
     useEffect(() => {
         dispatch(loadArticle(id));

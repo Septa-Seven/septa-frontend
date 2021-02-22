@@ -2,6 +2,7 @@ import React, {Fragment, useMemo} from 'react';
 import {Typography} from "@material-ui/core";
 import Box from "@material-ui/core/Box";
 import {articleDispatchTable} from "../../../../utils/articleDispatchTable";
+import {Link} from "react-router-dom";
 
 export const Article = ({article}) => {
     console.log(article);
@@ -25,7 +26,8 @@ export const Article = ({article}) => {
     return (
         <Fragment>
             <Box>
-                <a href={`news/${id}/`}><Typography variant={"h4"}>{title}</Typography></a>
+                <Link to={`news/${id}/`} key={title} ><Typography variant={"h4"}>{title}</Typography></Link>
+
                 {newsElements && newsElements.map((item, index) => (<Fragment key={index}>{item}</Fragment>))}
             </Box>
         </Fragment>
