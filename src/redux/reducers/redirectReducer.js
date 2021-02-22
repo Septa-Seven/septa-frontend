@@ -3,7 +3,7 @@ import {
 } from "../../shared/constants";
 
 const initialState = {
-    redirect: '',
+    path: '',
 }
 
 export const redirectReducer = (state = initialState, action) => {
@@ -11,7 +11,7 @@ export const redirectReducer = (state = initialState, action) => {
         case ROUTING:
             return {
                 ...state,
-                redirect: action.payload,
+                path: action.payload,
             }
        default: return state;
 

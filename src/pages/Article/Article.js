@@ -3,6 +3,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {articleDispatchTable} from "../../utils";
 import {loadArticle} from "../../redux/actions/actions";
 import {useParams} from "react-router-dom";
+import {Comment, CommentForm} from './components';
 
 export const Article = () => {
     const dispatch = useDispatch()
@@ -31,6 +32,11 @@ export const Article = () => {
     return (
         <Fragment>
             {newsElements && newsElements.map((item, index) => (<Fragment key={index}>{item}</Fragment>))}
+            <h2>Комментарии</h2>
+            {newsData.comments && newsData.comments.map(({id, body, user, user_name, created_at}) => (
+                <Comment body={body} user={user} date={created_at} key={id} userName={user_name}/>
+            ))}
+            <CommentForm />
         </Fragment>
     )
 }

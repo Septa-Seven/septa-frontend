@@ -31,11 +31,13 @@ export const authReducer = (state = initialState, action) => {
             }
 
         case LOGIN_USER_SUCCESS:
+            localStorage.setItem('token', action.payload.data.access);
             return {
                 ...state,
                 ...action.payload,
                 isLoading: false,
                 isAuthenticated: true,
+                token: action.payload.data.access,
 
             }
 

@@ -7,10 +7,12 @@ import {Routing} from "../../../routing";
 export const ReditectHOC = () => {
     const history = useHistory();
     const redirect = useSelector(state => state.redirect.path);
+    console.log(redirect);
 
     useEffect(() => {
         history.push(redirect);
-    }, [redirect])
+        console.log('asdasd');
+    }, [history, redirect])
 
     return (
         <Routing />

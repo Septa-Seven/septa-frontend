@@ -6,11 +6,12 @@ import Box from "@material-ui/core/Box";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import {registerPageStyle} from "./RegisterPage.style";
+import {InputText} from "../../shared/components/InputText";
 
 export const RegisterPage = () => {
     const classes = registerPageStyle();
 
-    const {register, handleSubmit, errors} = useForm();
+    const {control, handleSubmit, errors} = useForm();
     const dispatch = useDispatch();
     const onSubmit = (data) => dispatch(registerUser(data));
     const errorAuth = useSelector(state => state.auth.isAuthenticated);
@@ -20,13 +21,13 @@ export const RegisterPage = () => {
         <form onSubmit={handleSubmit(onSubmit)} className={classes.form} >
             <h1>Регистрация</h1>
             <Box>
-                <TextField id="outlined-basic" label="Логин" variant="outlined" name='username' className={classes.input} />
+                <InputText label="Логин" variant="outlined" name='username' className={classes.input} control={control}/>
             </Box>
             <Box>
-                <TextField id="outlined-basic" label="Эл. почта" variant="outlined" name='email' className={classes.input} />
+                <InputText label="Эл. почта" variant="outlined" name='email' className={classes.input} control={control}/>
             </Box>
             <Box>
-                <TextField id="outlined-basic" label="Пароль" variant="outlined" name='password' className={classes.input} />
+                <InputText label="Пароль" variant="outlined" name='password' className={classes.input} control={control}/>
             </Box>
             <Button variant="contained" color="primary" size="large" type='submit'>
                 Зарегистрироваться

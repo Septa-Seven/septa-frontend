@@ -3,7 +3,7 @@ import {
     LOAD_ARTICLE_FAIL,
     LOAD_ARTICLE_SUCCESS, LOAD_ARTICLES, LOAD_ARTICLES_FAIL, LOAD_ARTICLES_SUCCESS,
     LOGIN_USER, LOGIN_USER_FAIL,
-    LOGIN_USER_SUCCESS,
+    LOGIN_USER_SUCCESS, POST_COMMENT, POST_COMMENT_FAIL, POST_COMMENT_SUCCESS,
     POST_TOKEN,
     PUT_USER,
     REGISTER_USER, REGISTER_USER_FAIL,
@@ -125,5 +125,24 @@ export const redirect = (data) => {
     return {
         type: ROUTING,
         payload: data,
+    };
+}
+
+export const postCommentSuccess = () => {
+    return {
+        type: POST_COMMENT_SUCCESS,
+    };
+}
+
+export const postComment = (data) => {
+    return {
+        type: POST_COMMENT,
+        payload: data,
+    };
+}
+
+export const postCommentFail = () => {
+    return {
+        type: POST_COMMENT_FAIL,
     };
 }

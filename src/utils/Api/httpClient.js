@@ -53,12 +53,14 @@ function failureResponseInterceptor(error) {
  * Перехват запросов перед отправкой на сервер
  * */
 
-function successRequestIntecepter( request ) {
+function successRequestInterceptor( request ) {
+  const token = localStorage.getItem('token');
   request.headers = {'X-Requested-With': 'XMLHttpRequest'};
+
   return Promise.resolve(request);
 }
 
-function failureRequestIntecepter(error) {
+function failureRequestInterceptor(error) {
   return Promise.reject(error);
 }
 
@@ -79,8 +81,8 @@ Api.interceptors.response.use(
   failureResponseInterceptor,
 );
 Api.interceptors.request.use(
-  successRequestIntecepter,
-  failureRequestIntecepter,
+  successRequestInterceptor,
+  failureRequestInterceptor,
 );
 
 

@@ -22,3 +22,7 @@ export const LOAD_ARTICLES_SUCCESS = 'LOAD_ARTICLES_SUCCESS';
 
 export const GET_ERRORS = 'GET_ERRORS';
 export const CLEAR_ERRORS = 'GET_ERRORS';
+
+export const POST_COMMENT = 'GET_ERRORS';
+export const POST_COMMENT_SUCCESS = 'GET_ERRORS';
+export const POST_COMMENT_FAIL = 'GET_ERRORS';
