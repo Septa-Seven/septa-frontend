@@ -56,7 +56,7 @@ function failureResponseInterceptor(error) {
 function successRequestInterceptor( request ) {
   const token = localStorage.getItem('token');
   request.headers = {'X-Requested-With': 'XMLHttpRequest'};
-
+  if(token) request.headers = {'Authorization': `JWT ${token}`};
   return Promise.resolve(request);
 }
 

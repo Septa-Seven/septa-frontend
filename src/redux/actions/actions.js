@@ -7,7 +7,7 @@ import {
     POST_TOKEN,
     PUT_USER,
     REGISTER_USER, REGISTER_USER_FAIL,
-    REGISTER_USER_SUCCESS, ROUTING, USER_LOADED, USER_LOADING
+    REGISTER_USER_SUCCESS, ROUTING, SET_TOKEN, USER_LOADED, USER_LOADING
 } from "../../shared/constants";
 
 export const putUser = (data) => {
@@ -20,6 +20,13 @@ export const putUser = (data) => {
 export const userLoading = (data) => {
     return {
         type: USER_LOADING,
+        payload: data,
+    };
+}
+
+export const setToken = (data) => {
+    return {
+        type: SET_TOKEN,
         payload: data,
     };
 }
@@ -134,15 +141,16 @@ export const postCommentSuccess = () => {
     };
 }
 
-export const postComment = (data) => {
+export const postComment = (data, article) => {
     return {
         type: POST_COMMENT,
-        payload: data,
+        payload: {...data, article},
     };
 }
 
-export const postCommentFail = () => {
+export const postCommentFail = (data) => {
     return {
         type: POST_COMMENT_FAIL,
+        payload: data,
     };
 }

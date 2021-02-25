@@ -3,8 +3,13 @@ import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 
 export const Comment = ({user, body, date, userName}) => {
+    const parseDate = new Date(date);
+    const formatter = new Intl.DateTimeFormat("ru");
+    const showDate = formatter.format(parseDate);
+    const time = `${parseDate.getHours()}:${parseDate.getMinutes()}`
+
     return (
-        <Paper style={{ padding: "40px 20px" }}>
+        <Paper style={{ padding: "20px 10px", marginBottom: '20px'}}>
             <Grid container wrap="nowrap" spacing={2}>
                 <Grid item>
                 </Grid>
@@ -14,7 +19,7 @@ export const Comment = ({user, body, date, userName}) => {
                         {body}{" "}
                     </p>
                     <p style={{ textAlign: "left", color: "gray" }}>
-                        опубликовано {date} назад
+                        опубликовано {showDate} {time}
                     </p>
                 </Grid>
             </Grid>

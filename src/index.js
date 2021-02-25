@@ -8,7 +8,7 @@ import {store} from './redux';
 import {Routing} from "./routing";
 import {Navbar} from "./core/components/Navbar/Navbar";
 import './index.css';
-import {ReditectHOC} from "./core/components/RedirectHOC";
+import {RedirectHOC} from "./core/components/RedirectHOC";
 
 ReactDOM.render(
     <React.StrictMode>
@@ -16,7 +16,7 @@ ReactDOM.render(
             <BrowserRouter>
                 <Navbar />
                 <Container maxWidth="lg">
-                    <ReditectHOC />
+                    <RedirectHOC />
                 </Container>
             </BrowserRouter>
         </Provider>

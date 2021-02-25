@@ -5,4 +5,6 @@ export const API_URLS = {
 
     articles: '/api/articles/',
     article: '/api/articles/:id/',
+
+    comments: '/api/comments/',
 }

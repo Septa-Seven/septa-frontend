@@ -1,1 +1,1 @@
-export { ReditectHOC } from './ReditectHOC';
+export { RedirectHOC } from './RedirectHOC';

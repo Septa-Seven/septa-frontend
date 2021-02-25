@@ -32,4 +32,10 @@ export const API_getArticles = async () => {
   return await Api.get(API_URLS.articles);
 }
 
+export const API_postComment = async ({article, body}) => {
+  return await Api.post(API_URLS.comments, {
+    'article': article,
+    'body': body,
+  });
+}
 

@@ -1,7 +1,7 @@
 import {
     LOGIN_USER_FAIL,
     LOGIN_USER_SUCCESS, LOGOUT_SUCCESS, REGISTER_USER_FAIL,
-    REGISTER_USER_SUCCESS,
+    REGISTER_USER_SUCCESS, SET_TOKEN,
     USER_LOADED,
     USER_LOADING
 } from "../../shared/constants";
@@ -28,6 +28,7 @@ export const authReducer = (state = initialState, action) => {
                 isAuthenticated: true,
                 isLoading: false,
                 user: action.payload,
+                token: action.payload.data.access
             }
 
         case LOGIN_USER_SUCCESS:
@@ -46,6 +47,12 @@ export const authReducer = (state = initialState, action) => {
                 ...state,
                 isLoading: false,
                 isAuthenticated: null,
+            }
+
+        case SET_TOKEN:
+            return {
+                token: action.payload,
+                ...state,
             }
 
         case LOGIN_USER_FAIL:
