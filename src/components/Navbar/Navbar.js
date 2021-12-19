@@ -12,7 +12,7 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import { Link } from "react-router-dom";
-import { pageNames, routes } from "../../shared/constants/routes";
+import { pageNames, routes } from "../../shared/routes";
 import * as s from "./styles";
 
 const settings = ["Профиль", "Выход"];

@@ -3,6 +3,7 @@ export const routes = {
   news: "/news",
   leagues: "/leagues",
   login: "/login",
+  callbacks: "/github_callback",
 };
 
 export const pageNames = {

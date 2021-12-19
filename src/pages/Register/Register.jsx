@@ -1,9 +1,10 @@
-import { IconButton, Paper, Typography } from "@mui/material";
+import { Link, Paper, Typography } from "@mui/material";
 import { CenteredVH } from "../../components";
 import * as s from "./styles";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import GoogleIcon from "@mui/icons-material/Google";
 import FacebookIcon from "@mui/icons-material/Facebook";
+import { apiUrls } from "./model/apiUrls";
 
 export const Register = () => {
   return (
@@ -14,17 +15,17 @@ export const Register = () => {
             Авторизация
           </Typography>
 
-          <IconButton aria-label="upload picture" component="span" size="large">
+          <Link href={apiUrls.github} underline="none">
             <GitHubIcon />
-          </IconButton>
+          </Link>
 
-          <IconButton aria-label="upload picture" component="span" size="large">
+          <Link href={apiUrls.google} underline="none">
             <GoogleIcon />
-          </IconButton>
+          </Link>
 
-          <IconButton aria-label="upload picture" component="span" size="large">
+          <Link href={apiUrls.vk} underline="none">
             <FacebookIcon />
-          </IconButton>
+          </Link>
         </s.Container>
       </Paper>
     </CenteredVH>
