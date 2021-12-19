@@ -1,2 +1,4 @@
 export { Register } from "./Register";
-export { Login } from "./Login";
+export { News } from "./News";
+export { Leagues } from "./Leagues";
+export { Home } from "./Home";

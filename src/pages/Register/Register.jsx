@@ -11,7 +11,7 @@ export const Register = () => {
       <Paper elevation={1}>
         <s.Container>
           <Typography variant="h4" align="center">
-            Регистрация
+            Авторизация
           </Typography>
 
           <IconButton aria-label="upload picture" component="span" size="large">
