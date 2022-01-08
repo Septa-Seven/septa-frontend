@@ -1,15 +1,18 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { App } from "./App";
-import { Provider } from "react-redux";
-import { store } from "./store/store";
 import "./index.css";
+
+import { StoreContext } from "./storeContext";
+import { AuthStore } from "./stores/authStore";
+
+const authStore = new AuthStore();
 
 ReactDOM.render(
   <React.StrictMode>
-    <Provider store={store}>
+    <StoreContext.Provider value={authStore}>
       <App />
-    </Provider>
+    </StoreContext.Provider>
   </React.StrictMode>,
   document.getElementById("root")
 );
