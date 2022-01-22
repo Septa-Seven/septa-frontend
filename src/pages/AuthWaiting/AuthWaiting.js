@@ -4,6 +4,8 @@ import { CircularProgress } from "@mui/material";
 import { useContext, useEffect } from "react";
 import { observer } from "mobx-react-lite";
 import { StoreContext } from "../../storeContext";
+import { Navigate } from "react-router-dom";
+import { routes } from "../../shared/routes";
 
 export const AuthWaiting = observer(({ endpoint }) => {
   const authStore = useContext(StoreContext);
@@ -16,6 +18,8 @@ export const AuthWaiting = observer(({ endpoint }) => {
   return (
     <CenteredVH>
       <CircularProgress />
+
+      {authStore.authenticated && <Navigate to={routes.home} />}
     </CenteredVH>
   );
 });

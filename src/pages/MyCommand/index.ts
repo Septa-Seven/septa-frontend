@@ -1,0 +1,1 @@
+export { MyCommand } from "./MyCommand";

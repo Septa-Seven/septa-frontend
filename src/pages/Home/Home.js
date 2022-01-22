@@ -1,3 +1,3 @@
 export const Home = () => {
-  return <div>mem</div>;
+  return <h1>Главная страница</h1>;
 };

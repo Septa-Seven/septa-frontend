@@ -1,7 +1,7 @@
-import { request } from "../../shared/settings";
+import { axiosInstance } from "../../shared/settings";
 
 export const postCode = async ({ endpoint, code }) => {
-  return await request.post(endpoint, {
+  return await axiosInstance.post(endpoint, {
     code,
   });
 };
