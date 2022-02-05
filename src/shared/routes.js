@@ -3,6 +3,7 @@ export const routes = {
   news: "/news",
   leagues: "/leagues",
   login: "/login",
+  team: "/team/:id",
   github: "/github_callback",
   google: "/google_callback",
   vk: "/vk_callback",

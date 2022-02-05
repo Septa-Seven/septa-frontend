@@ -14,6 +14,7 @@ export const AuthWaiting = observer(({ endpoint }) => {
   useEffect(() => {
     const code = getQueryParams(window.location.href, "code");
     Auth.deleteAccessToken();
+    Auth.deleteRefreshToken();
     authStore.login(code, endpoint);
   }, [authStore, endpoint]);
 

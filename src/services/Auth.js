@@ -27,6 +27,10 @@ export class Auth {
     return localStorage.getItem(REFRESH_TOKEN);
   }
 
+  static deleteRefreshToken() {
+    localStorage.removeItem(REFRESH_TOKEN);
+  }
+
   static setRefreshToken(refreshToken) {
     localStorage.setItem(REFRESH_TOKEN, refreshToken);
   }

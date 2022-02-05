@@ -9,7 +9,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { pageNames, routes } from "../../shared/routes";
 import * as s from "./styles";
 import { observer } from "mobx-react-lite";
@@ -22,6 +22,7 @@ const NavbarView = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [isShowTeamForm, setIsShowTeamForm] = useState(false);
   const { authStore, profileStore } = useContext(storeContext);
+  const navigate = useNavigate();
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -30,6 +31,24 @@ const NavbarView = () => {
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
+
+  const TeamButton = profileStore.teamId ? (
+    <Button
+      variant="contained"
+      color="secondary"
+      onClick={() => navigate(routes.team.replace(":id", profileStore.teamId))}
+    >
+      Посмотреть данные о моей команде
+    </Button>
+  ) : (
+    <Button
+      variant="contained"
+      color="secondary"
+      onClick={() => setIsShowTeamForm(true)}
+    >
+      Создать команду
+    </Button>
+  );
 
   return (
     <>
@@ -113,13 +132,7 @@ const NavbarView = () => {
                 style={{ display: "flex", gap: "10px" }}
               >
                 {authStore.accessToken ? (
-                  <Button
-                    variant="contained"
-                    color="secondary"
-                    onClick={() => setIsShowTeamForm(true)}
-                  >
-                    Создать команду
-                  </Button>
+                  TeamButton
                 ) : (
                   <Typography variant="h6">
                     <Link to={routes.login}>Войти</Link>
