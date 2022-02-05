@@ -31,15 +31,21 @@ axiosInstance.interceptors.response.use(
 
     if (error.response.status === 401 && refreshToken) {
       originalRequest._retry = true;
-      const response = await axios.post(apiUrls.refreshToken, {
-        refresh_token: refreshToken,
-      });
 
-      if (response.status === 200) {
-        Auth.setRefreshToken(response.data);
-        axios.defaults.headers.common["Authorization"] =
-          "Bearer " + Auth.getAccessToken();
-        return axios(originalRequest);
+      try {
+        const response = await axios.post(apiUrls.refreshToken, {
+          refresh_token: refreshToken,
+        });
+
+        if (response.status === 200) {
+          Auth.setRefreshToken(response.data);
+          axios.defaults.headers.common["Authorization"] =
+            "Bearer " + Auth.getAccessToken();
+          return axios(originalRequest);
+        }
+      } catch (e) {
+        Auth.deleteAccessToken();
+        return document.location.assign("/login");
       }
     }
   }

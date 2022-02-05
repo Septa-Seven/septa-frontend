@@ -3,15 +3,17 @@ import { CenteredVH } from "../../components";
 import { CircularProgress } from "@mui/material";
 import { useContext, useEffect } from "react";
 import { observer } from "mobx-react-lite";
-import { StoreContext } from "../../storeContext";
+import { storeContext } from "../../StoreProvider";
 import { Navigate } from "react-router-dom";
 import { routes } from "../../shared/routes";
+import { Auth } from "../../services/Auth";
 
 export const AuthWaiting = observer(({ endpoint }) => {
-  const authStore = useContext(StoreContext);
+  const { authStore } = useContext(storeContext);
 
   useEffect(() => {
     const code = getQueryParams(window.location.href, "code");
+    Auth.deleteAccessToken();
     authStore.login(code, endpoint);
   }, [authStore, endpoint]);
 
@@ -19,7 +21,7 @@ export const AuthWaiting = observer(({ endpoint }) => {
     <CenteredVH>
       <CircularProgress />
 
-      {authStore.authenticated && <Navigate to={routes.home} />}
+      {authStore.accessToken && <Navigate to={routes.home} />}
     </CenteredVH>
   );
 });

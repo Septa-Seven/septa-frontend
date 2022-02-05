@@ -3,16 +3,13 @@ import ReactDOM from "react-dom";
 import { App } from "./App";
 import "./index.css";
 
-import { StoreContext } from "./storeContext";
-import { AuthStore } from "./stores/authStore";
-
-const authStore = new AuthStore();
+import { StoreProvider } from "./StoreProvider";
 
 ReactDOM.render(
   <React.StrictMode>
-    <StoreContext.Provider value={authStore}>
+    <StoreProvider>
       <App />
-    </StoreContext.Provider>
+    </StoreProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );
