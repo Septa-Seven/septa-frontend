@@ -1,15 +1,31 @@
 import * as s from "./styles";
-import Button from "@mui/material/Button";
+import { LoadingButton } from "@mui/lab";
 import { useForm, Controller } from "react-hook-form";
+import { createTeam } from "./module/api";
+import { toast } from "react-hot-toast";
+import { useState } from "react";
 
 export const CreateTeamForm = () => {
   const { handleSubmit, control } = useForm();
+  const [isLoading, setIsLoading] = useState(false);
+
+  const onSubmit = async (data) => {
+    setIsLoading(true);
+    try {
+      await createTeam(data);
+    } catch (e) {
+      toast.error(e.response.data.detail, { position: "bottom-right" });
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
     <>
-      <form onSubmit={handleSubmit((data) => console.log(data))}>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <Controller
           control={control}
-          name={"name"}
+          name="name"
           render={({ field: { onChange, value, name } }) => (
             <s.TextInput
               id={name}
@@ -24,7 +40,7 @@ export const CreateTeamForm = () => {
 
         <Controller
           control={control}
-          name={"description"}
+          name="description"
           render={({ field: { onChange, value, name } }) => (
             <s.TextInput
               id={name}
@@ -37,9 +53,9 @@ export const CreateTeamForm = () => {
           )}
         />
 
-        <Button type="submit" variant="contained">
+        <LoadingButton type="submit" variant="contained" loading={isLoading}>
           Создать команду
-        </Button>
+        </LoadingButton>
       </form>
     </>
   );

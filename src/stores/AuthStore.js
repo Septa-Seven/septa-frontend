@@ -19,7 +19,7 @@ export class AuthStore {
 
       this.userId = data.user.pk;
     } catch (e) {
-      toast.error(e.message, { position: "bottom-right" });
+      toast.error(e.response.data.detail, { position: "bottom-right" });
     }
   }
 
