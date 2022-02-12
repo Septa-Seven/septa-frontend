@@ -23,6 +23,12 @@ export class AuthStore {
     }
   }
 
+  logout() {
+    Auth.deleteAccessToken();
+    Auth.deleteRefreshToken();
+    document.location.assign("/");
+  }
+
   setAccessToken(accessToken) {
     this.accessToken = accessToken;
   }

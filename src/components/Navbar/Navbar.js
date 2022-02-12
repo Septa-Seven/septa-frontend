@@ -132,7 +132,17 @@ const NavbarView = () => {
                 style={{ display: "flex", gap: "10px" }}
               >
                 {authStore.accessToken ? (
-                  TeamButton
+                  <>
+                    {TeamButton}
+                    <Button
+                      color="secondary"
+                      onClick={() => {
+                        authStore.logout();
+                      }}
+                    >
+                      Выйти
+                    </Button>
+                  </>
                 ) : (
                   <Typography variant="h6">
                     <Link to={routes.login}>Войти</Link>
