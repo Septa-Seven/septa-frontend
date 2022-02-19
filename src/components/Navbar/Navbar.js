@@ -16,7 +16,7 @@ import { observer } from "mobx-react-lite";
 import { useContext, useState } from "react";
 import { storeContext } from "../../StoreProvider";
 import { Modal } from "../Modal";
-import { CreateTeamForm } from "../../forms/CreateTeamForm";
+import { CreateTeamForm } from "../../forms";
 
 const NavbarView = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -51,110 +51,107 @@ const NavbarView = () => {
   );
 
   return (
-    <>
+    <s.Container>
       <AppBar position="static">
         <Container maxWidth="xl">
-          <s.Container>
-            <Toolbar disableGutters>
-              <Typography
-                variant="h6"
-                sx={{ mr: 2, display: { xs: "none", md: "flex" } }}
-              >
-                <Link to={routes.home}>Septa</Link>
-              </Typography>
+          <Toolbar disableGutters>
+            <Typography
+              variant="h6"
+              sx={{ mr: 2, display: { xs: "none", md: "flex" } }}
+            >
+              <Link to={routes.home}>Septa</Link>
+            </Typography>
 
-              <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
-                <IconButton
-                  size="large"
-                  aria-label="account of current user"
-                  aria-controls="menu-appbar"
-                  aria-haspopup="true"
-                  onClick={handleOpenNavMenu}
-                  color="inherit"
-                >
-                  <MenuIcon />
-                </IconButton>
-                <Menu
-                  id="menu-appbar"
-                  anchorEl={anchorElNav}
-                  anchorOrigin={{
-                    vertical: "bottom",
-                    horizontal: "left",
-                  }}
-                  keepMounted
-                  transformOrigin={{
-                    vertical: "top",
-                    horizontal: "left",
-                  }}
-                  open={Boolean(anchorElNav)}
-                  onClose={handleCloseNavMenu}
-                  sx={{
-                    display: { xs: "block", md: "none" },
-                  }}
-                >
-                  {Object.keys(pageNames).map((key) => (
-                    <div key={key}>{key}</div>
-                  ))}
-                  {Object.keys(pageNames).map((key) => (
-                    <MenuItem key={key} onClick={handleCloseNavMenu}>
-                      <Link to={routes[key]}>
-                        <Typography textAlign="center">
-                          {pageNames[key]}
-                        </Typography>
-                      </Link>
-                    </MenuItem>
-                  ))}
-                </Menu>
-              </Box>
-              <Typography
-                variant="h6"
-                noWrap
-                component="div"
-                sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}
+            <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
+              <IconButton
+                size="large"
+                aria-label="account of current user"
+                aria-controls="menu-appbar"
+                aria-haspopup="true"
+                onClick={handleOpenNavMenu}
+                color="inherit"
               >
-                Septa
-              </Typography>
-              <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
+                <MenuIcon />
+              </IconButton>
+              <Menu
+                id="menu-appbar"
+                anchorEl={anchorElNav}
+                anchorOrigin={{
+                  vertical: "bottom",
+                  horizontal: "left",
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: "top",
+                  horizontal: "left",
+                }}
+                open={Boolean(anchorElNav)}
+                onClose={handleCloseNavMenu}
+                sx={{
+                  display: { xs: "block", md: "none" },
+                }}
+              >
                 {Object.keys(pageNames).map((key) => (
-                  <Link to={routes[key]} key={key}>
-                    <Button
-                      onClick={handleCloseNavMenu}
-                      sx={{ my: 2, color: "white", display: "block" }}
-                    >
-                      {pageNames[key]}
-                    </Button>
-                  </Link>
+                  <div key={key}>{key}</div>
                 ))}
-              </Box>
+                {Object.keys(pageNames).map((key) => (
+                  <MenuItem key={key} onClick={handleCloseNavMenu}>
+                    <Link to={routes[key]}>
+                      <Typography textAlign="center">
+                        {pageNames[key]}
+                      </Typography>
+                    </Link>
+                  </MenuItem>
+                ))}
+              </Menu>
+            </Box>
+            <Typography
+              variant="h6"
+              noWrap
+              component="div"
+              sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}
+            >
+              Septa
+            </Typography>
+            <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
+              {Object.keys(pageNames).map((key) => (
+                <Link to={routes[key]} key={key}>
+                  <Button
+                    onClick={handleCloseNavMenu}
+                    sx={{ my: 2, color: "white", display: "block" }}
+                  >
+                    {pageNames[key]}
+                  </Button>
+                </Link>
+              ))}
+            </Box>
 
-              <Box
-                sx={{ flexGrow: 0 }}
-                style={{ display: "flex", gap: "10px" }}
-              >
-                {authStore.accessToken ? (
-                  <>
-                    {TeamButton}
-                    <Button
-                      color="secondary"
-                      onClick={() => {
-                        authStore.logout();
-                      }}
-                    >
-                      Выйти
-                    </Button>
-                  </>
-                ) : (
-                  <Typography variant="h6">
-                    <Link to={routes.login}>Войти</Link>
-                  </Typography>
-                )}
+            <Box sx={{ flexGrow: 0 }} style={{ display: "flex", gap: "10px" }}>
+              {authStore.accessToken ? (
+                <>
+                  {TeamButton}
+                  <Button
+                    color="secondary"
+                    variant="contained"
+                    t
+                    onClick={() => {
+                      authStore.logout();
+                    }}
+                  >
+                    Выйти
+                  </Button>
+                </>
+              ) : (
+                <Typography variant="h6">
+                  <Link to={routes.login}>Войти</Link>
+                </Typography>
+              )}
 
-                {!!profileStore.username && (
-                  <Typography variant="h6">{profileStore.username}</Typography>
-                )}
-              </Box>
-            </Toolbar>
-          </s.Container>
+              {!!profileStore.username && (
+                <Typography variant="h6">{profileStore.username}</Typography>
+              )}
+            </Box>
+          </Toolbar>
         </Container>
       </AppBar>
       <Modal
@@ -163,7 +160,7 @@ const NavbarView = () => {
       >
         <CreateTeamForm />
       </Modal>
-    </>
+    </s.Container>
   );
 };
 
