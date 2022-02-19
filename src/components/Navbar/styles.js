@@ -7,3 +7,5 @@ export const Container = styled.div`
     color: #fff;
   }
 `;
+
+export const MenuContainer = styled.div``;
