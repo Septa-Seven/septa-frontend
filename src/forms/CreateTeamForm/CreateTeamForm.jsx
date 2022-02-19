@@ -34,6 +34,7 @@ export const CreateTeamForm = () => {
               value={value}
               label="Название команды"
               variant="outlined"
+              fullWidth
             />
           )}
         />
@@ -49,6 +50,7 @@ export const CreateTeamForm = () => {
               value={value}
               label="Описание команды"
               variant="outlined"
+              fullWidth
             />
           )}
         />

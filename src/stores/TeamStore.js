@@ -21,6 +21,5 @@ export class TeamStore {
     this.users = data.users;
     this.leader = data.leader;
     this.membersCount = data.members_count;
-    console.log(data);
   }
 }

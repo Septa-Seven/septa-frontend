@@ -2,9 +2,11 @@ import { useContext, useEffect } from "react";
 import { storeContext } from "../../StoreProvider";
 import { useParams } from "react-router";
 import { Container, Typography } from "@mui/material";
+import { observer } from "mobx-react-lite";
 
-export const Team = () => {
+const TeamView = () => {
   const { teamStore } = useContext(storeContext);
+  console.log(teamStore);
   const params = useParams();
 
   useEffect(() => {
@@ -27,3 +29,5 @@ export const Team = () => {
     </Container>
   );
 };
+
+export const Team = observer(TeamView);

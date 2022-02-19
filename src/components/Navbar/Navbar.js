@@ -9,28 +9,30 @@ import * as s from "./styles";
 import { observer } from "mobx-react-lite";
 import { useContext, useRef, useState } from "react";
 import { storeContext } from "../../StoreProvider";
-import { Modal } from "../Modal";
-import { CreateTeamForm } from "../../forms";
 import { Popover } from "@mui/material";
 import { routes } from "../../shared/routes";
 import { useNavigate } from "react-router";
 
 const NavbarView = () => {
-  const [isShowTeamForm, setIsShowTeamForm] = useState(false);
   const [isShowMenu, setIsShowMenu] = useState(false);
   const { authStore, profileStore } = useContext(storeContext);
   const navigate = useNavigate();
 
   const dropDownRef = useRef();
 
+  const HandleCommandClick = () => {
+    setIsShowMenu(false);
+
+    if (profileStore.teamId) {
+      navigate(routes.team.replace(":id", profileStore.teamId));
+    } else {
+      navigate(routes.createTeam);
+    }
+  };
+
   const TeamButton = (
     <>
-      <Button
-        fullWidth
-        onClick={() =>
-          navigate(routes.team.replace(":id", profileStore.teamId))
-        }
-      >
+      <Button fullWidth onClick={HandleCommandClick}>
         Команда
       </Button>
     </>
@@ -96,12 +98,6 @@ const NavbarView = () => {
           </Toolbar>
         </Container>
       </AppBar>
-      <Modal
-        isShow={isShowTeamForm}
-        handleClose={() => setIsShowTeamForm(false)}
-      >
-        <CreateTeamForm />
-      </Modal>
     </s.Container>
   );
 };
