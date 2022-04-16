@@ -39,7 +39,7 @@ const TeamView = () => {
             </Typography>
           </div>
 
-          <QuitTeam />
+          {teamStore.leader && <QuitTeam isLeader={teamStore.isLeader} />}
         </s.InfoWrapper>
       </Plate>
       <s.TeamInfoContainer>

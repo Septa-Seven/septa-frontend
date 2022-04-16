@@ -1,9 +1,9 @@
 import { Button } from "@mui/material";
 
-export const QuitTeam = () => {
+export const QuitTeam = ({ isLeader }) => {
   return (
     <Button variant="contained" color="secondary">
-      Покинуть
+      {isLeader ? "Убить команду" : "Покинуть команду"}
     </Button>
   );
 };

@@ -7,6 +7,8 @@ import {
 } from "../modules/team/api";
 
 export class TeamStore {
+  rootStore = null;
+
   id = null;
   name = "";
   description = "";
@@ -15,10 +17,10 @@ export class TeamStore {
   invitations = [];
   leader = null;
   membersCount = null;
-  isLeader = null;
 
-  constructor() {
+  constructor(rootStore) {
     makeAutoObservable(this);
+    this.rootStore = rootStore;
   }
 
   async getTeam(id) {
@@ -29,6 +31,10 @@ export class TeamStore {
     this.team = data.users;
     this.leader = data.leader;
     this.membersCount = data.members_count;
+  }
+
+  get isLeader() {
+    return this.rootStore.profileStore.userId === this.leader;
   }
 
   async getUsers(username, hasTeam) {
