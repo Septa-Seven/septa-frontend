@@ -1,0 +1,1 @@
+export { QuitTeam } from "./QuitTeam";

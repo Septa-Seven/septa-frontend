@@ -5,7 +5,7 @@ import { createTeam } from "./module/api";
 import { toast } from "react-hot-toast";
 import { useState } from "react";
 
-export const CreateTeamForm = () => {
+export const CreateTeam = () => {
   const { handleSubmit, control } = useForm();
   const [isLoading, setIsLoading] = useState(false);
 

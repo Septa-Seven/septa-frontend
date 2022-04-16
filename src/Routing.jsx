@@ -1,10 +1,10 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import {
   AuthWaiting,
-  CreateTeam,
+  CreateTeamForm,
   Home,
   Leagues,
-  News,
+  Articles,
   Register,
   Team,
 } from "./pages";
@@ -33,8 +33,8 @@ export const Routing = () => {
         />
 
         <Route
-          path={routes.news}
-          element={<WithHeader component={<News />} />}
+          path={routes.articles}
+          element={<WithHeader component={<Articles />} />}
         />
 
         <Route
@@ -44,7 +44,7 @@ export const Routing = () => {
 
         <Route
           path={routes.createTeam}
-          element={<WithHeader component={<CreateTeam />} />}
+          element={<WithHeader component={<CreateTeamForm />} />}
         />
 
         <Route
@@ -53,6 +53,13 @@ export const Routing = () => {
             <WithHeader
               component={<AuthWaiting endpoint={apiUrls.googleAuth} />}
             />
+          }
+        />
+
+        <Route
+          path={routes.vk}
+          element={
+            <WithHeader component={<AuthWaiting endpoint={apiUrls.vkAuth} />} />
           }
         />
 

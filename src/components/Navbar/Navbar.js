@@ -7,15 +7,15 @@ import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
 import * as s from "./styles";
 import { observer } from "mobx-react-lite";
-import { useContext, useRef, useState } from "react";
-import { storeContext } from "../../StoreProvider";
+import { useRef, useState } from "react";
+import { useStores } from "../../StoreProvider";
 import { Popover } from "@mui/material";
 import { routes } from "../../shared/routes";
 import { useNavigate } from "react-router";
 
 const NavbarView = () => {
   const [isShowMenu, setIsShowMenu] = useState(false);
-  const { authStore, profileStore } = useContext(storeContext);
+  const { authStore, profileStore } = useStores();
   const navigate = useNavigate();
 
   const dropDownRef = useRef();

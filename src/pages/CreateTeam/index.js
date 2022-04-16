@@ -1,1 +1,1 @@
-export { CreateTeam } from "./CreateTeam";
+export { CreateTeamForm } from "./CreateTeamForm";

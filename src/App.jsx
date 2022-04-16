@@ -1,12 +1,12 @@
 import { Routing } from "./Routing";
-import { useContext, useEffect } from "react";
-import { storeContext } from "./StoreProvider";
+import { useEffect } from "react";
+import { useStores } from "./StoreProvider";
 import { Auth } from "./services/Auth";
 import { observer } from "mobx-react-lite";
 import { Toaster } from "react-hot-toast";
 
 const AppView = () => {
-  const { authStore, profileStore } = useContext(storeContext);
+  const { authStore, profileStore } = useStores();
 
   useEffect(() => {
     const accessToken = Auth.getAccessToken();

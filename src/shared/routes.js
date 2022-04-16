@@ -1,6 +1,6 @@
 export const routes = {
   home: "/",
-  news: "/news",
+  articles: "/articles",
   leagues: "/leagues",
   command: "/command",
   login: "/login",

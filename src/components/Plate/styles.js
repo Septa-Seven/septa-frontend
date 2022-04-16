@@ -6,5 +6,5 @@ export const Container = styled.div`
   border-radius: 10px;
   padding: 20px 30px;
   margin-bottom: 20px;
-  display: inline-block;
+  background: #fff;
 `;

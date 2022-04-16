@@ -1,12 +1,12 @@
-import { CreateTeamForm, Plate } from "../../components";
+import { CreateTeam, Plate } from "../../components";
 import { Button } from "@mui/material";
 import { Invites } from "../../forms";
-import * as s from "./styles";
 import { useNavigate } from "react-router";
 import { routes } from "../../shared/routes";
 import { getQueryParams } from "../../utils/getQueryParams";
+import * as s from "./styles";
 
-export const CreateTeam = () => {
+export const CreateTeamForm = () => {
   const formState = getQueryParams(window.location.href, "formState");
   const navigate = useNavigate();
 
@@ -35,7 +35,7 @@ export const CreateTeam = () => {
         ) : (
           <>
             <s.Title variant="h5">Создание команды</s.Title>
-            <CreateTeamForm />
+            <CreateTeam />
           </>
         )}
       </s.Container>

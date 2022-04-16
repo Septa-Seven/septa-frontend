@@ -1,16 +1,12 @@
-import { createContext } from "react";
-import { AuthStore } from "./stores/AuthStore";
-import { UserProfile } from "./stores/UserProfile";
-import { TeamStore } from "./stores/TeamStore";
+import React, { createContext } from "react";
+import { RootStore } from "./stores/RootStore";
 
 export const storeContext = createContext();
 
-const stores = {
-  authStore: new AuthStore(),
-  profileStore: new UserProfile(),
-  teamStore: new TeamStore(),
-};
-
 export const StoreProvider = ({ children }) => (
-  <storeContext.Provider value={stores}>{children}</storeContext.Provider>
+  <storeContext.Provider value={new RootStore()}>
+    {children}
+  </storeContext.Provider>
 );
+
+export const useStores = () => React.useContext(storeContext);

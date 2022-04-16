@@ -1,15 +1,15 @@
 import { getQueryParams } from "../../utils/getQueryParams";
 import { CenteredVH } from "../../components";
 import { CircularProgress } from "@mui/material";
-import { useContext, useEffect } from "react";
+import { useEffect } from "react";
 import { observer } from "mobx-react-lite";
-import { storeContext } from "../../StoreProvider";
+import { useStores } from "../../StoreProvider";
 import { Navigate } from "react-router-dom";
 import { routes } from "../../shared/routes";
 import { Auth } from "../../services/Auth";
 
 export const AuthWaiting = observer(({ endpoint }) => {
-  const { authStore } = useContext(storeContext);
+  const { authStore } = useStores();
 
   useEffect(() => {
     const code = getQueryParams(window.location.href, "code");
