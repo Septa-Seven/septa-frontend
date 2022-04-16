@@ -26,6 +26,9 @@ export const Register = () => {
           <Link href={apiUrls.vk} underline="none">
             <FacebookIcon />
           </Link>
+          <Link href={apiUrls.yandex} underline="none">
+            <FacebookIcon />
+          </Link>
         </s.Container>
       </Paper>
     </CenteredVH>

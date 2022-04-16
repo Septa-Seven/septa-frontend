@@ -71,6 +71,15 @@ export const Routing = () => {
             />
           }
         />
+
+        <Route
+          path={routes.yandex}
+          element={
+            <WithHeader
+              component={<AuthWaiting endpoint={apiUrls.yandexAuth} />}
+            />
+          }
+        />
       </Routes>
     </BrowserRouter>
   );

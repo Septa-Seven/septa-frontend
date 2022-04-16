@@ -7,6 +7,7 @@ export const routes = {
   team: "/team/:id",
   createTeam: "/create-team",
   github: "/github_callback",
+  yandex: "/yandex_callback",
   google: "/google_callback",
   vk: "/vk_callback",
 };
