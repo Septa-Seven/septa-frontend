@@ -1,14 +1,26 @@
-import { CreateTeam, Plate } from "../../components";
+import { CreateTeam, List, Plate } from "../../components";
 import { Button } from "@mui/material";
-import { Invites } from "../../forms";
 import { useNavigate } from "react-router";
 import { routes } from "../../shared/routes";
 import { getQueryParams } from "../../utils/getQueryParams";
 import * as s from "./styles";
+import AddIcon from "@mui/icons-material/Add";
+import { useStores } from "../../StoreProvider";
+import { useEffect } from "react";
+import { listMapper } from "../../utils/listMapper";
 
 export const CreateTeamForm = () => {
   const formState = getQueryParams(window.location.href, "formState");
+  const { teamStore } = useStores();
   const navigate = useNavigate();
+
+  const handleInvite = (userId) => {
+    teamStore.inviteUser(userId);
+  };
+
+  useEffect(() => {
+    teamStore.getUserInvitations();
+  }, [teamStore]);
 
   return (
     <Plate>
@@ -29,7 +41,11 @@ export const CreateTeamForm = () => {
             <s.Or variant="subtitle1">или</s.Or>
 
             <s.FormContainer>
-              <Invites />
+              <List
+                data={listMapper(teamStore.userInvitations, "username")}
+                icon={<AddIcon />}
+                onClick={handleInvite}
+              />
             </s.FormContainer>
           </>
         ) : (

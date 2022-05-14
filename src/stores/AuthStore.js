@@ -14,8 +14,8 @@ export class AuthStore {
   async login(code, endpoint) {
     try {
       const data = await Auth.login(code, endpoint);
-      this.accessToken = data.access_token;
-      this.refreshToken = data.refresh_token;
+      this.accessToken = data.accessToken;
+      this.refreshToken = data.refreshToken;
 
       this.userId = data.user.pk;
     } catch (e) {

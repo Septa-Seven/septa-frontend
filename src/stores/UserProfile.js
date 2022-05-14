@@ -15,7 +15,7 @@ export class UserProfile {
       const { data } = await getProfileInfo(userId);
       this.username = data.username;
       this.userId = data.id;
-      this.teamId = data.team_id;
+      this.teamId = data.teamId;
     } catch (e) {
       console.log(e);
     }

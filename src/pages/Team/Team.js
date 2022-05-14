@@ -8,6 +8,7 @@ import * as s from "./styles";
 import CloseIcon from "@mui/icons-material/Close";
 import AddIcon from "@mui/icons-material/Add";
 import { QuitTeam } from "./components";
+import { listMapper } from "../../utils/listMapper";
 
 const TeamView = () => {
   const { teamStore } = useStores();
@@ -23,8 +24,16 @@ const TeamView = () => {
     teamStore.getUsers(value);
   }, 160);
 
-  const handleInvite = (userId) => {
-    teamStore.inviteUser(userId);
+  const handleInvite = async (userId) => {
+    await teamStore.inviteUser(userId);
+    await teamStore.getUsers("", false);
+    await teamStore.getInvitations();
+  };
+
+  const handleDeleteInvitation = async (userId) => {
+    await teamStore.deleteUserInvitations(userId);
+    await teamStore.getUsers("", false);
+    await teamStore.getInvitations();
   };
 
   return (
@@ -45,14 +54,18 @@ const TeamView = () => {
       <s.TeamInfoContainer>
         <Plate>
           <Typography variant="h5">Участники</Typography>
-          <List users={teamStore.team} icon={<CloseIcon />} />
+          <List data={listMapper(teamStore.team, "username")} />
         </Plate>
 
         <div>
           <Plate>
             <Typography variant="h5">Приглашения</Typography>
             {teamStore.invitations.length > 0 ? (
-              <List users={teamStore.invitations} icon={<CloseIcon />} />
+              <List
+                data={listMapper(teamStore.invitations, "userName")}
+                icon={<CloseIcon />}
+                onClick={handleDeleteInvitation}
+              />
             ) : (
               <Typography variant="h6">Нет приглашений</Typography>
             )}
@@ -70,7 +83,7 @@ const TeamView = () => {
             />
             <s.ListWrapper>
               <List
-                users={teamStore.users}
+                data={listMapper(teamStore.users, "username")}
                 showSearch
                 icon={<AddIcon />}
                 onClick={handleInvite}

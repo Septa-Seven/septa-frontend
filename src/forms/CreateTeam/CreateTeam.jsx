@@ -1,23 +1,17 @@
 import * as s from "./styles";
 import { LoadingButton } from "@mui/lab";
 import { useForm, Controller } from "react-hook-form";
-import { createTeam } from "./module/api";
-import { toast } from "react-hot-toast";
-import { useState } from "react";
+import { useNavigate } from "react-router";
+import { useStores } from "../../StoreProvider";
 
 export const CreateTeam = () => {
   const { handleSubmit, control } = useForm();
-  const [isLoading, setIsLoading] = useState(false);
+  const { teamStore, profileStore } = useStores();
+  const navigate = useNavigate();
 
   const onSubmit = async (data) => {
-    setIsLoading(true);
-    try {
-      await createTeam(data);
-    } catch (e) {
-      toast.error(e.response.data.detail, { position: "bottom-right" });
-    } finally {
-      setIsLoading(false);
-    }
+    await teamStore.createTeam(data);
+    navigate(`/team/${profileStore.teamId}`);
   };
 
   return (
@@ -55,7 +49,7 @@ export const CreateTeam = () => {
           )}
         />
 
-        <LoadingButton type="submit" variant="contained" loading={isLoading}>
+        <LoadingButton type="submit" variant="contained">
           Создать команду
         </LoadingButton>
       </form>

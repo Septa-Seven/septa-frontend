@@ -1,10 +1,14 @@
 import { makeAutoObservable } from "mobx";
 import {
   createInvitation,
+  deleteTeam,
+  deleteUserInvitation,
   getInvitations,
   getTeam,
+  getUserInvitations,
   getUsers,
 } from "../modules/team/api";
+import { createTeam } from "../forms/CreateTeam/module/api";
 
 export class TeamStore {
   rootStore = null;
@@ -17,10 +21,16 @@ export class TeamStore {
   invitations = [];
   leader = null;
   membersCount = null;
+  userInvitations = [];
 
   constructor(rootStore) {
     makeAutoObservable(this);
     this.rootStore = rootStore;
+  }
+
+  async createTeam(data) {
+    const res = await createTeam(data);
+    this.rootStore.profileStore.teamId = res.data.id;
   }
 
   async getTeam(id) {
@@ -30,7 +40,7 @@ export class TeamStore {
     this.description = data.description;
     this.team = data.users;
     this.leader = data.leader;
-    this.membersCount = data.members_count;
+    this.membersCount = data.membersCount;
   }
 
   get isLeader() {
@@ -49,5 +59,19 @@ export class TeamStore {
 
   async inviteUser(userId) {
     await createInvitation(userId);
+  }
+
+  async deleteUserInvitations(id) {
+    await deleteUserInvitation(id);
+  }
+
+  async getUserInvitations() {
+    const { data } = await getUserInvitations();
+    this.userInvitations = data.results;
+  }
+
+  async deleteTeam() {
+    await deleteTeam();
+    this.rootStore.profileStore.teamId = null;
   }
 }

@@ -8,8 +8,8 @@ export class Auth {
   static async login(code, endpoint) {
     const { data } = await postCode({ endpoint, code });
 
-    localStorage.setItem(ACCESS_TOKEN, data.access_token);
-    localStorage.setItem(REFRESH_TOKEN, data.refresh_token);
+    localStorage.setItem(ACCESS_TOKEN, data.accessToken);
+    localStorage.setItem(REFRESH_TOKEN, data.refreshToken);
     localStorage.setItem(USER, data.user.pk);
 
     return data;
