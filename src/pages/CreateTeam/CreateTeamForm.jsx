@@ -8,14 +8,15 @@ import AddIcon from "@mui/icons-material/Add";
 import { useStores } from "../../StoreProvider";
 import { useEffect } from "react";
 import { listMapper } from "../../utils/listMapper";
+import { observer } from "mobx-react-lite";
 
-export const CreateTeamForm = () => {
+const CreateTeamFormView = () => {
   const formState = getQueryParams(window.location.href, "formState");
   const { teamStore } = useStores();
   const navigate = useNavigate();
-
-  const handleInvite = (userId) => {
-    teamStore.inviteUser(userId);
+  const handleAcceptInvitation = async (teamId) => {
+    await teamStore.acceptInvitation(teamId);
+    navigate(routes.team.replace(":id", teamId));
   };
 
   useEffect(() => {
@@ -37,14 +38,12 @@ export const CreateTeamForm = () => {
             >
               Создать команду
             </Button>
-
             <s.Or variant="subtitle1">или</s.Or>
-
             <s.FormContainer>
               <List
-                data={listMapper(teamStore.userInvitations, "username")}
+                data={listMapper(teamStore.userInvitations, "teamName")}
                 icon={<AddIcon />}
-                onClick={handleInvite}
+                onClick={handleAcceptInvitation}
               />
             </s.FormContainer>
           </>
@@ -58,3 +57,5 @@ export const CreateTeamForm = () => {
     </Plate>
   );
 };
+
+export const CreateTeamForm = observer(CreateTeamFormView);

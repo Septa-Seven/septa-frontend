@@ -7,6 +7,7 @@ const apiUrls = {
   userInvitations: "/api/users/invitations/",
   deleteInvitations: "/api/teams/invitations/:id/",
   deleteTeam: "/api/teams/quit/",
+  acceptInvitation: "/api/teams/invitations/:id/accept/",
 };
 
 export const getTeam = async (id) => {
@@ -31,6 +32,10 @@ export const createInvitation = async (user) => {
 
 export const getUserInvitations = async () => {
   return await axiosInstance.get(apiUrls.userInvitations);
+};
+
+export const acceptInvitation = async (id) => {
+  return await axiosInstance.post(apiUrls.acceptInvitation.replace(":id", id));
 };
 
 export const deleteUserInvitation = async (id) => {

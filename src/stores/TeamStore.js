@@ -1,5 +1,6 @@
 import { makeAutoObservable } from "mobx";
 import {
+  acceptInvitation,
   createInvitation,
   deleteTeam,
   deleteUserInvitation,
@@ -55,6 +56,10 @@ export class TeamStore {
   async getInvitations() {
     const { data } = await getInvitations();
     this.invitations = data.results;
+  }
+
+  async acceptInvitation(id) {
+    await acceptInvitation(id);
   }
 
   async inviteUser(userId) {
