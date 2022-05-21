@@ -1,6 +1,7 @@
 import { makeAutoObservable } from "mobx";
 import { Auth } from "../services/Auth";
 import { toast } from "react-hot-toast";
+import { tokenVerify } from "../modules/auth/api";
 
 export class AuthStore {
   accessToken = "";
@@ -21,6 +22,10 @@ export class AuthStore {
     } catch (e) {
       toast.error(e.response.data.detail, { position: "bottom-right" });
     }
+  }
+
+  async checkAuth(accessToken) {
+    await tokenVerify(accessToken);
   }
 
   logout() {

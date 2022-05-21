@@ -11,6 +11,7 @@ import {
 import { WithHeader } from "./layouts";
 import { routes } from "./shared/routes";
 import { apiUrls } from "./shared/apiUrls";
+import { ProtectedRoute } from "./components/ProtectedRoute/ProtectedRoute";
 
 export const Routing = () => {
   return (
@@ -19,7 +20,15 @@ export const Routing = () => {
         <Route
           path={routes.home}
           exact
-          element={<WithHeader component={<Home />} />}
+          element={
+            <WithHeader
+              component={
+                <ProtectedRoute>
+                  <Home />
+                </ProtectedRoute>
+              }
+            />
+          }
         />
 
         <Route

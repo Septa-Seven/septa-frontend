@@ -29,24 +29,27 @@ axiosInstance.interceptors.response.use(
     const originalRequest = error.config;
     const refreshToken = Auth.getRefreshToken();
 
-    if (error.response.status === 401 && refreshToken) {
-      originalRequest._retry = true;
+    if (error.response.status === 401) {
+      if (refreshToken) {
+        originalRequest._retry = true;
 
-      try {
-        const response = await axios.post(apiUrls.refreshToken, {
-          refresh_token: refreshToken,
-        });
+        try {
+          const response = await axios.post(apiUrls.refreshToken, {
+            refresh_token: refreshToken,
+          });
 
-        if (response.status === 200) {
-          Auth.setRefreshToken(response.data);
-          axios.defaults.headers.common["Authorization"] =
-            "Bearer " + Auth.getAccessToken();
-          return axios(originalRequest);
+          if (response.status === 200) {
+            Auth.setRefreshToken(response.data);
+            axios.defaults.headers.common["Authorization"] =
+              "Bearer " + Auth.getAccessToken();
+            return axios(originalRequest);
+          }
+        } catch (e) {
+          Auth.deleteAccessToken();
+          return document.location.assign("/login");
         }
-      } catch (e) {
-        Auth.deleteAccessToken();
-        // return document.location.assign("/login");
       }
+      return document.location.assign("/login");
     }
     throw error;
   }

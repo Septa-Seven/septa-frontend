@@ -11,14 +11,14 @@ import { QuitTeam } from "./components";
 import { listMapper } from "../../utils/listMapper";
 
 const TeamView = () => {
-  const { teamStore } = useStores();
+  const { teamStore, profileStore } = useStores();
   const params = useParams();
 
   useEffect(() => {
     teamStore.getTeam(params.id);
     teamStore.getUsers("", false);
-    teamStore.getInvitations();
-  }, [params.id, teamStore]);
+    profileStore.teamId && teamStore.getInvitations();
+  }, [params.id, profileStore.teamId, teamStore]);
 
   const handleSearch = debounce((value) => {
     teamStore.getUsers(value);
