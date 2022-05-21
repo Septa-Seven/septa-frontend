@@ -58,8 +58,10 @@ export class TeamStore {
     this.invitations = data.results;
   }
 
-  async acceptInvitation(id) {
-    await acceptInvitation(id);
+  async acceptInvitation(inviteId) {
+    await acceptInvitation(inviteId);
+    const selectedTeam = this.userInvitations.find(({ id }) => id === inviteId);
+    this.rootStore.profileStore.teamId = selectedTeam.team;
   }
 
   async inviteUser(userId) {

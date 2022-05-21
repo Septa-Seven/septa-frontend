@@ -6,7 +6,7 @@ export const TeamInfoContainer = styled.div`
   gap: 20px;
 
   & > div {
-    width: 50%;
+    flex-grow: 1;
   }
 `;
 

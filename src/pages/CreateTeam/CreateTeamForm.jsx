@@ -14,9 +14,12 @@ const CreateTeamFormView = () => {
   const formState = getQueryParams(window.location.href, "formState");
   const { teamStore } = useStores();
   const navigate = useNavigate();
-  const handleAcceptInvitation = async (teamId) => {
-    await teamStore.acceptInvitation(teamId);
-    navigate(routes.team.replace(":id", teamId));
+  const handleAcceptInvitation = async (inviteId) => {
+    await teamStore.acceptInvitation(inviteId);
+    const selectedTeam = teamStore.userInvitations.find(
+      ({ id }) => id === inviteId
+    );
+    navigate(routes.team.replace(":id", selectedTeam.team));
   };
 
   useEffect(() => {

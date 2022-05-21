@@ -57,40 +57,42 @@ const TeamView = () => {
           <List data={listMapper(teamStore.team, "username")} />
         </Plate>
 
-        <div>
-          <Plate>
-            <Typography variant="h5">Приглашения</Typography>
-            {teamStore.invitations.length > 0 ? (
-              <List
-                data={listMapper(teamStore.invitations, "userName")}
-                icon={<CloseIcon />}
-                onClick={handleDeleteInvitation}
-              />
-            ) : (
-              <Typography variant="h6">Нет приглашений</Typography>
-            )}
-          </Plate>
+        {teamStore.isLeader && (
+          <div>
+            <Plate>
+              <Typography variant="h5">Приглашения</Typography>
+              {teamStore.invitations.length > 0 ? (
+                <List
+                  data={listMapper(teamStore.invitations, "userName")}
+                  icon={<CloseIcon />}
+                  onClick={handleDeleteInvitation}
+                />
+              ) : (
+                <Typography variant="h6">Нет приглашений</Typography>
+              )}
+            </Plate>
 
-          <Plate>
-            <Typography variant="h5">Пригласить участника</Typography>
-            <TextField
-              label="Имя"
-              variant="standard"
-              fullWidth
-              onChange={(event) => {
-                handleSearch(event.target.value);
-              }}
-            />
-            <s.ListWrapper>
-              <List
-                data={listMapper(teamStore.users, "username")}
-                showSearch
-                icon={<AddIcon />}
-                onClick={handleInvite}
+            <Plate>
+              <Typography variant="h5">Пригласить участника</Typography>
+              <TextField
+                label="Имя"
+                variant="standard"
+                fullWidth
+                onChange={(event) => {
+                  handleSearch(event.target.value);
+                }}
               />
-            </s.ListWrapper>
-          </Plate>
-        </div>
+              <s.ListWrapper>
+                <List
+                  data={listMapper(teamStore.users, "username")}
+                  showSearch
+                  icon={<AddIcon />}
+                  onClick={handleInvite}
+                />
+              </s.ListWrapper>
+            </Plate>
+          </div>
+        )}
       </s.TeamInfoContainer>
     </>
   );
