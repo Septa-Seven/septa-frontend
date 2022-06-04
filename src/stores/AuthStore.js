@@ -4,9 +4,9 @@ import { toast } from "react-hot-toast";
 import { tokenVerify } from "../modules/auth/api";
 
 export class AuthStore {
-  accessToken = "";
   refreshToken = "";
   userId = undefined;
+  accessToken = Auth.getAccessToken();
 
   constructor() {
     makeAutoObservable(this);

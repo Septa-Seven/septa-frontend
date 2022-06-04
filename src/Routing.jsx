@@ -2,7 +2,6 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import {
   AuthWaiting,
   CreateTeamForm,
-  Home,
   Leagues,
   Articles,
   Register,
@@ -24,7 +23,7 @@ export const Routing = () => {
             <WithHeader
               component={
                 <ProtectedRoute>
-                  <Home />
+                  <Articles />
                 </ProtectedRoute>
               }
             />

@@ -1,15 +1,15 @@
 import { useEffect } from "react";
 import { useStores } from "../../StoreProvider";
-import { routes } from "../../shared/routes";
 import { useNavigate } from "react-router";
+import { routes } from "../../shared/routes";
 
 export const ProtectedRoute = ({ children }) => {
   const { authStore } = useStores();
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!authStore.accessToken) navigate(routes.login);
-    else authStore.checkAuth(authStore.accessToken);
+    if (authStore.accessToken) authStore.checkAuth(authStore.accessToken);
+    else navigate(routes.login);
   }, [authStore, navigate]);
 
   return <>{children}</>;
