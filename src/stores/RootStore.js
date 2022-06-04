@@ -6,7 +6,7 @@ import { UserProfile } from "./UserProfile";
 export class RootStore {
   constructor() {
     this.profileStore = new UserProfile(this);
-    this.articleStore = new ArticlesStore(this);
+    this.articlesStore = new ArticlesStore(this);
     this.authStore = new AuthStore(this);
     this.teamStore = new TeamStore(this);
   }

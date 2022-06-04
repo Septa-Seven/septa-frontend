@@ -1,14 +1,12 @@
-import { Paragraph } from "../components/article";
+import { Paragraph, Title, List, Delimiter } from "../components/article";
 
 const createTextComponent = ({ text }) => {
   return <Paragraph text={text} />;
 };
 
-// const createTitleComponent = ({text, level}) => {
-//     return (
-//         <Title text={text} level={level}/>
-//     )
-// }
+const createTitleComponent = ({ text, level }) => {
+  return <Title title={text} level={level} />;
+};
 //
 // const createImageComponent = ({file}) => {
 //     return (
@@ -16,22 +14,18 @@ const createTextComponent = ({ text }) => {
 //     )
 // }
 //
-// const createListComponent = (list) => {
-//     return (
-//         <List list={list} />
-//     )
-// }
-//
-// const createDelimiterComponent = () => {
-//     return (
-//         <Delimiter />
-//     )
-// }
+const createListComponent = ({ items }) => {
+  return <List items={items} />;
+};
+
+const createDelimiterComponent = () => {
+  return <Delimiter />;
+};
 
 export const blockParser = new Map([
   ["paragraph", createTextComponent],
-  // ['Header', createTitleComponent],
+  ["Header", createTitleComponent],
   // ['Image', createImageComponent],
-  // ['List', createListComponent],
-  // ['Delimiter', createDelimiterComponent],
+  ["List", createListComponent],
+  ["Delimiter", createDelimiterComponent],
 ]);
