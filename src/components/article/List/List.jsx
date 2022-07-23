@@ -4,7 +4,7 @@ export const List = ({ items }) => {
   return (
     <ul>
       {items.map((test, index) => (
-        <Typography key={index}>{test}</Typography>
+        <li key={index}><Typography >{test}</Typography></li>
       ))}
     </ul>
   );

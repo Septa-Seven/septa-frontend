@@ -1,4 +1,4 @@
-export const baseUrl = "http://192.168.0.17";
+export const baseUrl = "http://192.168.0.82";
 
 export const apiUrls = {
   vkAuth: "/api/auth/vk/",
