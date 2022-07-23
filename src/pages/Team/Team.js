@@ -17,8 +17,9 @@ const TeamView = () => {
   useEffect(() => {
     teamStore.getTeam(params.id);
     teamStore.getUsers("", false);
+    teamStore.getTeamSettings();
     profileStore.teamId && teamStore.getInvitations();
-  }, [params.id, profileStore.teamId, teamStore]);
+  }, []);
 
   const handleSearch = debounce((value) => {
     teamStore.getUsers(value);
@@ -53,7 +54,12 @@ const TeamView = () => {
       </Plate>
       <s.TeamInfoContainer>
         <Plate>
-          <Typography variant="h5">Участники</Typography>
+          <s.TeamTitleWrapper>
+            <Typography variant="h5">Участники</Typography>
+            <Typography>
+              {teamStore.membersCount}/{teamStore.settings.maxTeamSize}
+            </Typography>
+          </s.TeamTitleWrapper>
           <List data={listMapper(teamStore.team, "username")} />
         </Plate>
 
@@ -74,22 +80,28 @@ const TeamView = () => {
 
             <Plate>
               <Typography variant="h5">Пригласить участника</Typography>
-              <TextField
-                label="Имя"
-                variant="standard"
-                fullWidth
-                onChange={(event) => {
-                  handleSearch(event.target.value);
-                }}
-              />
-              <s.ListWrapper>
-                <List
-                  data={listMapper(teamStore.users, "username")}
-                  showSearch
-                  icon={<AddIcon />}
-                  onClick={handleInvite}
-                />
-              </s.ListWrapper>
+              {teamStore.isTeamFull ? (
+                <Typography variant="h6">Команда заполнена</Typography>
+              ) : (
+                <>
+                  <TextField
+                    label="Имя"
+                    variant="standard"
+                    fullWidth
+                    onChange={(event) => {
+                      handleSearch(event.target.value);
+                    }}
+                  />
+                  <s.ListWrapper>
+                    <List
+                      data={listMapper(teamStore.users, "username")}
+                      showSearch
+                      icon={<AddIcon />}
+                      onClick={handleInvite}
+                    />
+                  </s.ListWrapper>
+                </>
+              )}
             </Plate>
           </div>
         )}

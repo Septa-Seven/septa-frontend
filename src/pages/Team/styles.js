@@ -21,3 +21,9 @@ export const InfoWrapper = styled.div`
   align-items: center;
   justify-content: space-between;
 `;
+
+export const TeamTitleWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;

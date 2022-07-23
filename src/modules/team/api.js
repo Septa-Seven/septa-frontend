@@ -8,10 +8,15 @@ const apiUrls = {
   deleteInvitations: "/api/teams/invitations/:id/",
   deleteTeam: "/api/teams/quit/",
   acceptInvitation: "/api/teams/invitations/:id/accept/",
+  teamSettings: "/api/teams/settings/",
 };
 
 export const getTeam = async (id) => {
   return await axiosInstance.get(apiUrls.teams.replace(":id", id));
+};
+
+export const getTeamSettings = async () => {
+  return await axiosInstance.get(apiUrls.teamSettings);
 };
 
 export const getUsers = async (username, hasTeam) => {

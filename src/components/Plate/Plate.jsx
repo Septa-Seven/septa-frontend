@@ -1,5 +1,9 @@
 import * as s from "./styles";
 
-export const Plate = ({ children }) => {
-  return <s.Container>{children}</s.Container>;
+export const Plate = ({ children, inline = false, noPadding = false }) => {
+  return (
+    <s.Container inline={inline} noPadding={noPadding}>
+      {children}
+    </s.Container>
+  );
 };

@@ -6,6 +6,7 @@ import {
   deleteUserInvitation,
   getInvitations,
   getTeam,
+  getTeamSettings,
   getUserInvitations,
   getUsers,
 } from "../modules/team/api";
@@ -23,6 +24,7 @@ export class TeamStore {
   leader = null;
   membersCount = null;
   userInvitations = [];
+  settings = {};
 
   constructor(rootStore) {
     makeAutoObservable(this);
@@ -44,8 +46,17 @@ export class TeamStore {
     this.membersCount = data.membersCount;
   }
 
+  async getTeamSettings() {
+    const { data } = await getTeamSettings();
+    this.settings.maxTeamSize = data.maxTeamSize;
+  }
+
   get isLeader() {
     return this.rootStore.profileStore.userId === this.leader;
+  }
+
+  get isTeamFull() {
+    return this.membersCount >= this.settings.maxTeamSize;
   }
 
   async getUsers(username, hasTeam) {
