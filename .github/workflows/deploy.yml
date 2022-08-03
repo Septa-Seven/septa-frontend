@@ -18,13 +18,11 @@ jobs:
           node-version: 18
           cache: 'yarn'
 
-      - run: corepack enable
-
       -
         name: Build
         env:
           REACT_APP_BASE_URL: ${{ secrets.BACKEND_DOMAIN }}
-        run:
+        run: |
           yarn
           yarn build
 
