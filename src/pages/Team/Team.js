@@ -19,7 +19,7 @@ const TeamView = () => {
     teamStore.getUsers("", false);
     teamStore.getTeamSettings();
     profileStore.teamId && teamStore.getInvitations();
-  }, []);
+  }, [params.id, profileStore.teamId, teamStore]);
 
   const handleSearch = debounce((value) => {
     teamStore.getUsers(value);
