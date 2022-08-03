@@ -23,7 +23,7 @@ jobs:
         env:
           REACT_APP_BASE_URL: ${{ secrets.BACKEND_DOMAIN }}
         run:
-          yarn install
+          yarn
           yarn build
 
       -
