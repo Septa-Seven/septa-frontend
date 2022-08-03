@@ -21,7 +21,12 @@ jobs:
       -
         name: Build
         env:
-          REACT_APP_BASE_URL: ${{ secrets.BACKEND_DOMAIN }}
+          REACT_APP_API_ENDPOINT: ${{ secrets.REACT_APP_API_ENDPOINT }}
+          REACT_APP_VK_CLIENT_ID: ${{ secrets.REACT_APP_VK_CLIENT_ID }}
+          REACT_APP_GOOGLE_CLIENT_ID: ${{ secrets.REACT_APP_GOOGLE_CLIENT_ID }}
+          REACT_APP_YANDEX_CLIENT_ID: ${{ secrets.REACT_APP_YANDEX_CLIENT_ID }}
+          REACT_APP_GITHUB_CLIENT_ID: ${{ secrets.REACT_APP_GITHUB_CLIENT_ID }}
+          REACT_APP_FRONTEND_DOMAIN: ${{ secrets.REACT_APP_FRONTEND_DOMAIN }}
         run: |
           yarn
           yarn build
