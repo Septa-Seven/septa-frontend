@@ -13,6 +13,6 @@ resource "yandex_storage_bucket" "bucket" {
 
   website {
     index_document = "index.html"
-    error_document = "error.html"
+    error_document = "index.html"
   }
 }
