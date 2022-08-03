@@ -12,17 +12,22 @@ jobs:
         uses: actions/checkout@v2
 
       -
+        name: Setup node
         uses: actions/setup-node@v3
-        env:
-          REACT_APP_BASE_URL: ${{ secrets.BACKEND_DOMAIN }}
         with:
           node-version: 16
           cache: 'yarn'
 
       -
-        run: yarn build
+        name: Build
+        env:
+          REACT_APP_BASE_URL: ${{ secrets.BACKEND_DOMAIN }}
+        run:
+          yarn install
+          yarn build
 
       -
+        name: Upload
         uses: jakejarvis/s3-sync-action@master
         with:
           args: --acl public-read --follow-symlinks --delete
