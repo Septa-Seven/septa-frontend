@@ -12,18 +12,14 @@ jobs:
         uses: actions/checkout@v2
 
       -
-        name: Setup node
+        name: Build
         uses: actions/setup-node@v3
         with:
           node-version: 16
           cache: 'yarn'
-
-      -
-        name: Build
         env:
           REACT_APP_BASE_URL: ${{ secrets.BACKEND_DOMAIN }}
         run:
-          yarn
           yarn build
 
       -
