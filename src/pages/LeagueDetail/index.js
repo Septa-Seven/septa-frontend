@@ -1,0 +1,1 @@
+export { LeagueDetail } from "./LeagueDetail";

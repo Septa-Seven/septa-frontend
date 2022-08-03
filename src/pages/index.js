@@ -5,3 +5,4 @@ export { Home } from "./Home";
 export { AuthWaiting } from "./AuthWaiting";
 export { Team } from "./Team";
 export { CreateTeamForm } from "./CreateTeam";
+export { LeagueDetail } from "./LeagueDetail";

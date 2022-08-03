@@ -1,8 +1,9 @@
 import { makeAutoObservable } from "mobx";
-import { getLeagues } from "../modules/leagues/api";
+import { getGames, getLeague, getLeagues } from "../modules/leagues/api";
 
 export class LeaguesStore {
   leagues = [];
+  connectUrl = "";
 
   constructor() {
     makeAutoObservable(this);
@@ -12,5 +13,15 @@ export class LeaguesStore {
     const { data } = await getLeagues();
     console.log(data, "asdasd");
     this.leagues = data;
+  }
+
+  async getLeague(id) {
+    const { data } = await getLeague(id);
+    this.connectUrl = data.connectUrl;
+  }
+
+  async getGames(id) {
+    const { data } = await getGames(id);
+    this.connectUrl = data.connectUrl;
   }
 }
