@@ -3,6 +3,7 @@ import { useStores } from "../../StoreProvider";
 import { observer } from "mobx-react-lite";
 import { blockParser } from "../../services/blockParser";
 import * as s from "./styles";
+import { Typography } from "@mui/material";
 
 const ArticlesView = () => {
   const { articlesStore } = useStores();
@@ -11,23 +12,27 @@ const ArticlesView = () => {
     articlesStore.getArticles();
   }, [articlesStore]);
 
-  const alticles = useMemo(() => {
+  const articles = useMemo(() => {
     return articlesStore.articles.map((item) => {
-      return item.body.blocks.map((block) => {
+      const article = { title: item.title };
+      article.blocks = item.body.blocks.map((block) => {
         if (blockParser.has(block.type)) {
           const parsedBlock = blockParser.get(block.type);
           return parsedBlock(block.data);
         }
       });
+      return article;
     });
   }, [articlesStore.articles]);
+  console.log(articles);
 
   return (
     <div>
-      {alticles.map((article, index) => {
+      {articles.map((article, index) => {
         return (
           <s.Article key={index}>
-            {article.map((block, index) => (
+            <Typography variant="h2">{article.title}</Typography>
+            {article.blocks.map((block, index) => (
               <Fragment key={index}>{block}</Fragment>
             ))}
           </s.Article>
