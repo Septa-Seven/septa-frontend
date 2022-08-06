@@ -1,18 +1,25 @@
 import * as s from "./styles";
 import { LoadingButton } from "@mui/lab";
 import { useForm, Controller } from "react-hook-form";
-import { useNavigate } from "react-router";
-import { useStores } from "../../StoreProvider";
+import { useEffect } from "react";
 
-export const CreateTeam = () => {
-  const { handleSubmit, control } = useForm();
-  const { teamStore, profileStore } = useStores();
-  const navigate = useNavigate();
+export const CreateTeam = ({ onSubmit, serverErrors }) => {
+  const {
+    handleSubmit,
+    control,
+    formState: { errors },
+    setError,
+  } = useForm();
 
-  const onSubmit = async (data) => {
-    await teamStore.createTeam(data);
-    navigate(`/team/${profileStore.teamId}`);
-  };
+  // В отдельный хук
+  useEffect(() => {
+    serverErrors &&
+      Object.entries(serverErrors).map((error) => {
+        setError(error[0], { type: "custom", message: error[1][0] });
+      });
+  }, [serverErrors, setError]);
+
+  console.log(errors);
 
   return (
     <>
@@ -20,6 +27,7 @@ export const CreateTeam = () => {
         <Controller
           control={control}
           name="name"
+          rules={{ required: true }}
           render={({ field: { onChange, value, name } }) => (
             <s.TextInput
               id={name}
@@ -29,6 +37,8 @@ export const CreateTeam = () => {
               label="Название команды"
               variant="outlined"
               fullWidth
+              error={errors[name]}
+              helperText={errors[name]?.message}
             />
           )}
         />
@@ -36,6 +46,7 @@ export const CreateTeam = () => {
         <Controller
           control={control}
           name="description"
+          rules={{ required: true }}
           render={({ field: { onChange, value, name } }) => (
             <s.TextInput
               id={name}
@@ -45,6 +56,8 @@ export const CreateTeam = () => {
               label="Описание команды"
               variant="outlined"
               fullWidth
+              error={errors[name]}
+              helperText={errors[name]?.message}
             />
           )}
         />

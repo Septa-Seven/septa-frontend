@@ -10,16 +10,22 @@ import { useEffect } from "react";
 import { listMapper } from "../../utils/listMapper";
 import { observer } from "mobx-react-lite";
 
-const CreateTeamFormView = () => {
+const NoTeamView = () => {
   const formState = getQueryParams(window.location.href, "formState");
-  const { teamStore } = useStores();
+  const { teamStore, profileStore } = useStores();
   const navigate = useNavigate();
+
   const handleAcceptInvitation = async (inviteId) => {
     await teamStore.acceptInvitation(inviteId);
     const selectedTeam = teamStore.userInvitations.find(
       ({ id }) => id === inviteId
     );
     navigate(routes.team.replace(":id", selectedTeam.team));
+  };
+
+  const handleCreateTeam = async (data) => {
+    await teamStore.createTeam(data);
+    if (!teamStore.errors) navigate(`/team/${profileStore.teamId}`);
   };
 
   useEffect(() => {
@@ -53,7 +59,10 @@ const CreateTeamFormView = () => {
         ) : (
           <>
             <s.Title variant="h5">Создание команды</s.Title>
-            <CreateTeam />
+            <CreateTeam
+              onSubmit={handleCreateTeam}
+              serverErrors={teamStore.errors}
+            />
           </>
         )}
       </s.Container>
@@ -61,4 +70,4 @@ const CreateTeamFormView = () => {
   );
 };
 
-export const CreateTeamForm = observer(CreateTeamFormView);
+export const NoTeam = observer(NoTeamView);

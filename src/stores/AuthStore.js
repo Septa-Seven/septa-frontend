@@ -20,6 +20,7 @@ export class AuthStore {
 
       this.userId = data.user.pk;
     } catch (e) {
+      console.log(e);
       toast.error(e.response.data.detail, { position: "bottom-right" });
     }
   }

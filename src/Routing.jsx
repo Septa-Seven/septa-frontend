@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import {
   AuthWaiting,
-  CreateTeamForm,
+  NoTeam,
   Leagues,
   Articles,
   Register,
@@ -58,7 +58,7 @@ export const Routing = () => {
 
         <Route
           path={routes.createTeam}
-          element={<WithHeader component={<CreateTeamForm />} />}
+          element={<WithHeader component={<NoTeam />} />}
         />
 
         <Route

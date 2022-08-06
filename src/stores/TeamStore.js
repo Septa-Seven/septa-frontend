@@ -11,6 +11,7 @@ import {
   getUsers,
 } from "../modules/team/api";
 import { createTeam } from "../forms/CreateTeam/module/api";
+import { toast } from "react-hot-toast";
 
 export class TeamStore {
   rootStore = null;
@@ -25,6 +26,7 @@ export class TeamStore {
   membersCount = null;
   userInvitations = [];
   settings = {};
+  errors = null;
 
   constructor(rootStore) {
     makeAutoObservable(this);
@@ -32,8 +34,15 @@ export class TeamStore {
   }
 
   async createTeam(data) {
-    const res = await createTeam(data);
-    this.rootStore.profileStore.teamId = res.data.id;
+    try {
+      const res = await createTeam(data);
+      this.rootStore.profileStore.teamId = res.data.id;
+      this.errors = null;
+    } catch (error) {
+      error.response.data.detail &&
+        toast.error(error.response.data.detail, { position: "bottom-right" });
+      this.errors = error.response.data;
+    }
   }
 
   async getTeam(id) {
