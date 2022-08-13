@@ -46,7 +46,6 @@ export const CreateTeam = ({ onSubmit, serverErrors }) => {
         <Controller
           control={control}
           name="description"
-          rules={{ required: true }}
           render={({ field: { onChange, value, name } }) => (
             <s.TextInput
               id={name}
@@ -57,7 +56,7 @@ export const CreateTeam = ({ onSubmit, serverErrors }) => {
               variant="outlined"
               fullWidth
               error={errors[name]}
-              helperText={errors[name]?.message}
+              helperText="Не обязательно"
             />
           )}
         />

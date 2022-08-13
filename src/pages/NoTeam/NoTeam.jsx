@@ -1,5 +1,5 @@
 import { CreateTeam, List, Plate } from "../../components";
-import { Button } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 import { useNavigate } from "react-router";
 import { routes } from "../../shared/routes";
 import { getQueryParams } from "../../utils/getQueryParams";
@@ -49,6 +49,9 @@ const NoTeamView = () => {
             </Button>
             <s.Or variant="subtitle1">или</s.Or>
             <s.FormContainer>
+              {teamStore.userInvitations.length === 0 && (
+                <Typography>У вас нет приглашений</Typography>
+              )}
               <List
                 data={listMapper(teamStore.userInvitations, "teamName")}
                 icon={<AddIcon />}

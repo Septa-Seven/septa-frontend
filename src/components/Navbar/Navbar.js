@@ -1,5 +1,4 @@
 import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
@@ -47,26 +46,24 @@ const NavbarView = () => {
               <Link to={routes.home}>Septa</Link>
             </Typography>
 
-            <Box
-              style={{
-                display: "flex",
-                gap: "10px",
-                flexGrow: 1,
-                justifyContent: "flex-end",
-              }}
-            >
+            <s.MenuContainer>
+              <Typography>
+                <Link to={routes.leagues}>Лиги</Link>
+              </Typography>
               {authStore.accessToken ? (
                 <>
-                  <Button
-                    color="secondary"
-                    variant="contained"
-                    onClick={() => {
-                      setIsShowMenu(true);
-                    }}
-                    ref={dropDownRef}
-                  >
-                    {profileStore.username}
-                  </Button>
+                  {profileStore.username && (
+                    <Button
+                      color="secondary"
+                      variant="contained"
+                      onClick={() => {
+                        setIsShowMenu(true);
+                      }}
+                      ref={dropDownRef}
+                    >
+                      {profileStore.username}
+                    </Button>
+                  )}
                   <Popover
                     open={isShowMenu}
                     onClose={() => setIsShowMenu(false)}
@@ -94,7 +91,7 @@ const NavbarView = () => {
                   <Link to={routes.login}>Войти</Link>
                 </Typography>
               )}
-            </Box>
+            </s.MenuContainer>
           </Toolbar>
         </Container>
       </AppBar>

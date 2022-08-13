@@ -64,6 +64,10 @@ export class TeamStore {
     return this.rootStore.profileStore.userId === this.leader;
   }
 
+  get isMyTeam() {
+    return this.rootStore.profileStore.teamId === this.id;
+  }
+
   get isTeamFull() {
     return this.membersCount >= this.settings.maxTeamSize;
   }
