@@ -24,7 +24,6 @@ const ArticlesView = () => {
       return article;
     });
   }, [articlesStore.articles]);
-  console.log(articles);
 
   return (
     <div>

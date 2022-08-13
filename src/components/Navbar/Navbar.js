@@ -73,7 +73,7 @@ const NavbarView = () => {
                       horizontal: "left",
                     }}
                   >
-                    <s.MenuContainer>
+                    <div>
                       {TeamButton}
                       <Button
                         fullWidth
@@ -83,7 +83,7 @@ const NavbarView = () => {
                       >
                         Выйти
                       </Button>
-                    </s.MenuContainer>
+                    </div>
                   </Popover>
                 </>
               ) : (

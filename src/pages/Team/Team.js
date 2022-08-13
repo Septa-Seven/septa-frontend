@@ -12,14 +12,17 @@ import { listMapper } from "../../utils/listMapper";
 
 const TeamView = () => {
   const { teamStore, profileStore } = useStores();
-  const params = useParams();
+  const { id } = useParams();
 
   useEffect(() => {
-    teamStore.getTeam(params.id);
     teamStore.getUsers("", false);
     teamStore.getTeamSettings();
     profileStore.teamId && teamStore.getInvitations();
-  }, [params.id, profileStore.teamId, teamStore]);
+  }, [profileStore.teamId, teamStore]);
+
+  useEffect(() => {
+    teamStore.getTeam(id);
+  }, [id, teamStore]);
 
   const handleSearch = debounce((value) => {
     teamStore.getUsers(value);
@@ -70,11 +73,13 @@ const TeamView = () => {
             <Plate>
               <Typography variant="h5">Приглашения</Typography>
               {teamStore.invitations.length > 0 ? (
-                <List
-                  data={listMapper(teamStore.invitations, "userName")}
-                  icon={<CloseIcon />}
-                  onClick={handleDeleteInvitation}
-                />
+                <s.ListWrapper>
+                  <List
+                    data={listMapper(teamStore.invitations, "userName")}
+                    icon={<CloseIcon />}
+                    onClick={handleDeleteInvitation}
+                  />
+                </s.ListWrapper>
               ) : (
                 <Typography variant="h6">Нет приглашений</Typography>
               )}

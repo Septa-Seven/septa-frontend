@@ -46,18 +46,26 @@ export class TeamStore {
   }
 
   async getTeam(id) {
-    const { data } = await getTeam(id);
-    this.id = data.id;
-    this.name = data.name;
-    this.description = data.description;
-    this.team = data.users;
-    this.leader = data.leader;
-    this.membersCount = data.membersCount;
+    try {
+      const { data } = await getTeam(id);
+      this.id = data.id;
+      this.name = data.name;
+      this.description = data.description;
+      this.team = data.users;
+      this.leader = data.leader;
+      this.membersCount = data.membersCount;
+    } catch (e) {
+      toast.error(e.response.data.detail, { position: "bottom-right" });
+    }
   }
 
   async getTeamSettings() {
-    const { data } = await getTeamSettings();
-    this.settings.maxTeamSize = data.maxTeamSize;
+    try {
+      const { data } = await getTeamSettings();
+      this.settings.maxTeamSize = data.maxTeamSize;
+    } catch (e) {
+      console.log(e);
+    }
   }
 
   get isLeader() {
@@ -73,13 +81,21 @@ export class TeamStore {
   }
 
   async getUsers(username, hasTeam) {
-    const { data } = await getUsers(username, hasTeam);
-    this.users = data.results;
+    try {
+      const { data } = await getUsers(username, hasTeam);
+      this.users = data.results;
+    } catch (e) {
+      console.log(e);
+    }
   }
 
   async getInvitations() {
-    const { data } = await getInvitations();
-    this.invitations = data.results;
+    try {
+      const { data } = await getInvitations();
+      this.invitations = data.results;
+    } catch (e) {
+      console.log(e);
+    }
   }
 
   async acceptInvitation(inviteId) {
