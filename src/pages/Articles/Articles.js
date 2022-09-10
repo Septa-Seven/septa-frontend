@@ -30,7 +30,9 @@ const ArticlesView = () => {
       {articles.map((article, index) => {
         return (
           <s.Article key={index}>
-            <Typography variant="h2">{article.title}</Typography>
+            <Typography variant="h2" fontWeight="bold" marginBottom="24px">
+              {article.title}
+            </Typography>
             {article.blocks.map((block, index) => (
               <Fragment key={index}>{block}</Fragment>
             ))}

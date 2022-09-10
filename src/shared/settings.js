@@ -46,10 +46,10 @@ axiosInstance.interceptors.response.use(
           }
         } catch (e) {
           Auth.deleteAccessToken();
-          return document.location.assign("/login");
+          // return document.location.assign("/login");
         }
       }
-      return document.location.assign("/login");
+      // return document.location.assign("/login");
     }
 
     throw error;

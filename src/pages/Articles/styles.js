@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const Article = styled.div`
-  margin-bottom: 20px;
+  max-width: 800px;
+  margin: 0 auto 20px auto;
   padding: 10px;
 `;
