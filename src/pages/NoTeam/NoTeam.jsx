@@ -1,5 +1,5 @@
 import { CreateTeam, List, Plate } from "../../components";
-import { Button, Typography } from "@mui/material";
+import { Button } from "@mui/material";
 import { useNavigate } from "react-router";
 import { routes } from "../../shared/routes";
 import { getQueryParams } from "../../utils/getQueryParams";
@@ -33,43 +33,44 @@ const NoTeamView = () => {
   }, [teamStore]);
 
   return (
-    <Plate>
-      <s.Container>
-        {formState !== "createTeam" ? (
-          <>
-            <s.Title variant="h5">У вас нет команды</s.Title>
-            <Button
-              variant="contained"
-              fullWidth
-              onClick={() => {
-                navigate(`${routes.createTeam}?formState=createTeam`);
-              }}
-            >
-              Создать команду
-            </Button>
-            <s.Or variant="subtitle1">или</s.Or>
-            <s.FormContainer>
-              {teamStore.userInvitations.length === 0 && (
-                <Typography>У вас нет приглашений</Typography>
+    <s.Wrapper>
+      <Plate>
+        <s.Container>
+          {formState !== "createTeam" ? (
+            <>
+              <s.Title variant="h5">У вас нет команды</s.Title>
+              <Button
+                variant="contained"
+                fullWidth
+                onClick={() => {
+                  navigate(`${routes.createTeam}?formState=createTeam`);
+                }}
+              >
+                Создать команду
+              </Button>
+              {teamStore.userInvitations.length !== 0 && (
+                <s.Or variant="subtitle1">или</s.Or>
               )}
-              <List
-                data={listMapper(teamStore.userInvitations, "teamName")}
-                icon={<AddIcon />}
-                onClick={handleAcceptInvitation}
+              <s.FormContainer>
+                <List
+                  data={listMapper(teamStore.userInvitations, "teamName")}
+                  icon={<AddIcon />}
+                  onClick={handleAcceptInvitation}
+                />
+              </s.FormContainer>
+            </>
+          ) : (
+            <>
+              <s.Title variant="h5">Создание команды</s.Title>
+              <CreateTeam
+                onSubmit={handleCreateTeam}
+                serverErrors={teamStore.errors}
               />
-            </s.FormContainer>
-          </>
-        ) : (
-          <>
-            <s.Title variant="h5">Создание команды</s.Title>
-            <CreateTeam
-              onSubmit={handleCreateTeam}
-              serverErrors={teamStore.errors}
-            />
-          </>
-        )}
-      </s.Container>
-    </Plate>
+            </>
+          )}
+        </s.Container>
+      </Plate>
+    </s.Wrapper>
   );
 };
 

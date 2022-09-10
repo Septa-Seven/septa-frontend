@@ -3,6 +3,11 @@ import { Typography } from "@mui/material";
 
 export const FormContainer = styled.div``;
 
+export const Wrapper = styled.div`
+  max-width: 450px;
+  margin: 0 auto;
+`;
+
 export const Container = styled.div`
   text-align: center;
   min-width: 350px;
