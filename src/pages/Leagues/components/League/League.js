@@ -18,11 +18,11 @@ export const League = ({ league }) => {
     <Plate noPadding>
       <s.Container>
         <s.TitleContainer>
-          <s.Name>Название</s.Name>
+          <s.Name>{league.name}</s.Name>
           <Typography>{status}</Typography>
         </s.TitleContainer>
 
-        <Typography>
+        <Typography variant="caption">
           {getDateString(new Date(start))} -{" "}
           {end ? getDateString(new Date(end)) : "∞"}
         </Typography>

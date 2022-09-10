@@ -23,6 +23,7 @@ export const getUsers = async (username, hasTeam) => {
   return await axiosInstance.get(apiUrls.users, {
     params: {
       has_team: hasTeam ? "1" : "0",
+      username,
     },
   });
 };

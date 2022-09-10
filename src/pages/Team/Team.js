@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useStores } from "../../StoreProvider";
 import { useParams } from "react-router";
 import { debounce, TextField, Typography } from "@mui/material";
@@ -13,6 +13,8 @@ import { listMapper } from "../../utils/listMapper";
 const TeamView = () => {
   const { teamStore, profileStore } = useStores();
   const { id } = useParams();
+
+  const [username, setUsername] = useState("");
 
   useEffect(() => {
     teamStore.getUsers("", false);
@@ -31,13 +33,14 @@ const TeamView = () => {
   const handleInvite = async (userId) => {
     await teamStore.inviteUser(userId);
     await teamStore.getUsers("", false);
+    setUsername("");
     await teamStore.getInvitations();
   };
 
   const handleDeleteInvitation = async (userId) => {
     await teamStore.deleteUserInvitations(userId);
-    await teamStore.getUsers("", false);
     await teamStore.getInvitations();
+    await teamStore.getUsers("", false);
   };
 
   return (
@@ -95,7 +98,9 @@ const TeamView = () => {
                     label="Имя"
                     variant="standard"
                     fullWidth
+                    value={username}
                     onChange={(event) => {
+                      setUsername(event.target.value);
                       handleSearch(event.target.value);
                     }}
                   />

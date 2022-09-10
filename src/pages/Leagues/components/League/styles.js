@@ -8,6 +8,7 @@ export const Container = styled.div`
 export const TitleContainer = styled.div`
   display: flex;
   justify-content: space-between;
+  margin-bottom: 8px;
 `;
 
 export const Name = styled(Typography)`
