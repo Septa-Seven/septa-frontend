@@ -10,8 +10,6 @@ const LeaguesView = () => {
     leaguesStore.getLeagues();
   }, [leaguesStore]);
 
-  console.log(leaguesStore.leagues);
-
   return (
     <s.Container>
       {leaguesStore.leagues.length > 0 &&

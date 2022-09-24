@@ -7,6 +7,7 @@ import {
   Register,
   Team,
   LeagueDetail,
+  Article,
 } from "./pages";
 import { WithHeader } from "./layouts";
 import { routes } from "./shared/routes";
@@ -38,8 +39,8 @@ export const Routing = () => {
         />
 
         <Route
-          path={routes.articles}
-          element={<WithHeader component={<Articles />} />}
+          path={routes.article}
+          element={<WithHeader component={<Article />} />}
         />
 
         <Route

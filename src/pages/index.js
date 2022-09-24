@@ -6,3 +6,4 @@ export { AuthWaiting } from "./AuthWaiting";
 export { Team } from "./Team";
 export { NoTeam } from "./NoTeam";
 export { LeagueDetail } from "./LeagueDetail";
+export { Article } from "./Article";
