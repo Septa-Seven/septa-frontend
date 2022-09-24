@@ -22,7 +22,7 @@ export const AuthWaiting = observer(({ endpoint }) => {
     <CenteredVH>
       <CircularProgress />
 
-      {authStore.accessToken && <Navigate to={routes.home} />}
+      {authStore.accessToken && <Navigate to={routes.home} replace={true} />}
     </CenteredVH>
   );
 });

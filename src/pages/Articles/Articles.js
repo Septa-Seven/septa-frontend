@@ -6,6 +6,7 @@ import * as s from "./styles";
 import { Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 import { routes } from "../../shared/routes";
+import { Plate } from "../../components";
 
 const ArticlesView = () => {
   const { articlesStore } = useStores();
@@ -31,21 +32,23 @@ const ArticlesView = () => {
     <div>
       {articles.map((article, index) => {
         return (
-          <s.Article key={index}>
-            <Typography variant="h2" fontWeight="bold" marginBottom="24px">
-              <Link to={routes.article.replace(":id", article.id)}>
-                {article.title}
-              </Link>
-            </Typography>
-            {article.blocks.map((block, index) => (
-              <Fragment key={index}>{block}</Fragment>
-            ))}
-            <Typography variant="body1" fontWeight="bold" marginTop={1}>
-              <Link to={routes.article.replace(":id", article.id)}>
-                Подробнее
-              </Link>
-            </Typography>
-          </s.Article>
+          <Plate key={index}>
+            <s.Article>
+              <Typography variant="h2" fontWeight="bold" marginBottom="24px">
+                <Link to={routes.article.replace(":id", article.id)}>
+                  {article.title}
+                </Link>
+              </Typography>
+              {article.blocks.map((block, index) => (
+                <Fragment key={index}>{block}</Fragment>
+              ))}
+              <Typography variant="body1" fontWeight="bold" marginTop={1}>
+                <Link to={routes.article.replace(":id", article.id)}>
+                  Подробнее
+                </Link>
+              </Typography>
+            </s.Article>
+          </Plate>
         );
       })}
     </div>
