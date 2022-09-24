@@ -3,7 +3,6 @@ import { useStores } from "../../StoreProvider";
 import { observer } from "mobx-react-lite";
 import { blockParser } from "../../services/blockParser";
 import * as s from "./styles";
-import { Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 import { routes } from "../../shared/routes";
 import { Plate } from "../../components";
@@ -29,29 +28,29 @@ const ArticlesView = () => {
   }, [articlesStore.articles]);
 
   return (
-    <div>
+    <s.Container>
       {articles.map((article, index) => {
         return (
           <Plate key={index}>
             <s.Article>
-              <Typography variant="h2" fontWeight="bold" marginBottom="24px">
+              <s.Link variant="h2" fontWeight="bold" marginBottom="24px">
                 <Link to={routes.article.replace(":id", article.id)}>
                   {article.title}
                 </Link>
-              </Typography>
+              </s.Link>
               {article.blocks.map((block, index) => (
                 <Fragment key={index}>{block}</Fragment>
               ))}
-              <Typography variant="body1" fontWeight="bold" marginTop={1}>
+              <s.Link variant="body1" fontWeight="bold" marginTop={1}>
                 <Link to={routes.article.replace(":id", article.id)}>
                   Подробнее
                 </Link>
-              </Typography>
+              </s.Link>
             </s.Article>
           </Plate>
         );
       })}
-    </div>
+    </s.Container>
   );
 };
 

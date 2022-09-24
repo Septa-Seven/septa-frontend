@@ -22,6 +22,8 @@ export const League = ({ league }) => {
           <Typography>{status}</Typography>
         </s.TitleContainer>
 
+        <Typography>{league.description}</Typography>
+
         <Typography variant="caption">
           {getDateString(new Date(start))} -{" "}
           {end ? getDateString(new Date(end)) : "∞"}
