@@ -11,6 +11,7 @@ import { useStores } from "../../StoreProvider";
 import { Popover } from "@mui/material";
 import { routes } from "../../shared/routes";
 import { useNavigate } from "react-router";
+import { LoadingButton } from "@mui/lab";
 
 const NavbarView = () => {
   const [isShowMenu, setIsShowMenu] = useState(false);
@@ -52,18 +53,18 @@ const NavbarView = () => {
               </Typography>
               {authStore.accessToken ? (
                 <>
-                  {profileStore.username && (
-                    <Button
-                      color="secondary"
-                      variant="contained"
-                      onClick={() => {
-                        setIsShowMenu(true);
-                      }}
-                      ref={dropDownRef}
-                    >
-                      {profileStore.username}
-                    </Button>
-                  )}
+                  <LoadingButton
+                    color="secondary"
+                    variant="contained"
+                    loading={!profileStore.username}
+                    onClick={() => {
+                      setIsShowMenu(true);
+                    }}
+                    ref={dropDownRef}
+                  >
+                    {profileStore.username.substring(0, 10) || "loading..."}
+                  </LoadingButton>
+
                   <Popover
                     open={isShowMenu}
                     onClose={() => setIsShowMenu(false)}
