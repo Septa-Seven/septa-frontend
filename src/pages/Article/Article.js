@@ -5,6 +5,7 @@ import { useEffect, useMemo, Fragment } from "react";
 import { blockParser } from "../../services/blockParser";
 import * as s from "../Articles/styles";
 import { Typography } from "@mui/material";
+import { Plate } from "../../components";
 
 export const ArticleView = () => {
   const { id } = useParams();
@@ -28,18 +29,22 @@ export const ArticleView = () => {
   }, [articlesStore.article]);
 
   return (
-    <s.Article>
-      {article && (
-        <>
-          <Typography variant="h2" fontWeight="bold" marginBottom="24px">
-            {article.title}
-          </Typography>
-          {article.blocks.map((block, index) => (
-            <Fragment key={index}>{block}</Fragment>
-          ))}
-        </>
-      )}
-    </s.Article>
+    <s.Container>
+      <Plate>
+        <s.Article>
+          {article && (
+            <>
+              <Typography variant="h4" fontWeight="bold" marginBottom="24px">
+                {article.title}
+              </Typography>
+              {article.blocks.map((block, index) => (
+                <Fragment key={index}>{block}</Fragment>
+              ))}
+            </>
+          )}
+        </s.Article>
+      </Plate>
+    </s.Container>
   );
 };
 
