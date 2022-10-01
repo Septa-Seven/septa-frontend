@@ -6,6 +6,7 @@ import * as s from "./styles";
 import { Link } from "react-router-dom";
 import { routes } from "../../shared/routes";
 import { Plate } from "../../components";
+import { Button } from "@mui/material";
 
 const ArticlesView = () => {
   const { articlesStore } = useStores();
@@ -33,19 +34,27 @@ const ArticlesView = () => {
         return (
           <Plate key={index}>
             <s.Article>
-              <s.Link variant="h2" fontWeight="bold" marginBottom="24px">
-                <Link to={routes.article.replace(":id", article.id)}>
-                  {article.title}
-                </Link>
-              </s.Link>
-              {article.blocks.map((block, index) => (
-                <Fragment key={index}>{block}</Fragment>
-              ))}
-              <s.Link variant="body1" fontWeight="bold" marginTop={1}>
-                <Link to={routes.article.replace(":id", article.id)}>
+              <s.BlocksContainer>
+                <s.LinkContainer
+                  variant="h4"
+                  fontWeight="bold"
+                  marginBottom="24px"
+                >
+                  <Link to={routes.article.replace(":id", article.id)}>
+                    {article.title}
+                  </Link>
+                </s.LinkContainer>
+
+                {article.blocks.map((block, index) => (
+                  <Fragment key={index}>{block}</Fragment>
+                ))}
+              </s.BlocksContainer>
+
+              <Link to={routes.article.replace(":id", article.id)}>
+                <Button variant="contained" color="secondary">
                   Подробнее
-                </Link>
-              </s.Link>
+                </Button>
+              </Link>
             </s.Article>
           </Plate>
         );

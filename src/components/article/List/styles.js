@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const OrderedList = styled.ol`
   counter-reset: myCounter;
   padding: 0;
-  margin: 0;
+  margin: 0 0 25px 0;
 
   li {
     &:before {
@@ -12,17 +12,18 @@ export const OrderedList = styled.ol`
       content: counter(myCounter);
       color: white;
       background: #2980b9;
-      line-height: 30px;
-      width: 30px;
-      height: 30px;
+      line-height: 25px;
+      width: 25px;
+      height: 25px;
       font-weight: bold;
+      font-size: 14px;
     }
   }
 `;
 
 export const UnOrderedList = styled.ul`
   padding: 0;
-  margin: 0;
+  margin: 0 0 25px 0;
 
   li {
     display: flex;
@@ -42,7 +43,7 @@ export const UnOrderedList = styled.ul`
 `;
 
 export const ListItem = styled.li`
-  margin-bottom: 16px;
+  margin-bottom: 8px;
   list-style: none;
 
   p {
