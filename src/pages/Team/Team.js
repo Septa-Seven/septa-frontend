@@ -1,9 +1,14 @@
 import { useEffect, useState } from "react";
 import { useStores } from "../../StoreProvider";
 import { useParams } from "react-router";
-import { debounce, TextField, Typography } from "@mui/material";
+import {
+  CircularProgress,
+  debounce,
+  TextField,
+  Typography,
+} from "@mui/material";
 import { observer } from "mobx-react-lite";
-import { List, Plate } from "../../components";
+import { CenteredVH, List, Plate } from "../../components";
 import * as s from "./styles";
 import CloseIcon from "@mui/icons-material/Close";
 import AddIcon from "@mui/icons-material/Add";
@@ -13,13 +18,19 @@ import { listMapper } from "../../utils/listMapper";
 const TeamView = () => {
   const { teamStore, profileStore } = useStores();
   const { id } = useParams();
+  const [primaryLoad, setPrimaryLoad] = useState(false);
 
   const [username, setUsername] = useState("");
 
   useEffect(() => {
-    teamStore.getUsers("", false);
-    teamStore.getTeamSettings();
-    profileStore.teamId && teamStore.getInvitations();
+    const getInfo = async () => {
+      await teamStore.getUsers("", false);
+      await teamStore.getTeamSettings();
+      profileStore.teamId && (await teamStore.getInvitations());
+      setPrimaryLoad(true);
+    };
+
+    getInfo();
   }, [profileStore.teamId, teamStore]);
 
   useEffect(() => {
@@ -45,79 +56,91 @@ const TeamView = () => {
 
   return (
     <>
-      <Plate>
-        <s.InfoWrapper>
-          <div>
-            <Typography variant="h5">{teamStore.name}</Typography>
-            <Typography variant="body1">
-              Описание -{" "}
-              {teamStore.description ? teamStore.description : "отсутствует"}
-            </Typography>
-          </div>
+      {primaryLoad && (
+        <>
+          <Plate>
+            <s.InfoWrapper>
+              <div>
+                <Typography variant="h5">{teamStore.name}</Typography>
+                <Typography variant="body1">
+                  Описание -{" "}
+                  {teamStore.description
+                    ? teamStore.description
+                    : "отсутствует"}
+                </Typography>
+              </div>
 
-          {teamStore.leader && teamStore.isMyTeam && (
-            <QuitTeam isLeader={teamStore.isLeader} />
-          )}
-        </s.InfoWrapper>
-      </Plate>
-      <s.TeamInfoContainer>
-        <Plate>
-          <s.TeamTitleWrapper>
-            <Typography variant="h5">Участники</Typography>
-            <Typography>
-              {teamStore.membersCount}/{teamStore.settings.maxTeamSize}
-            </Typography>
-          </s.TeamTitleWrapper>
-          <List data={listMapper(teamStore.team, "username")} />
-        </Plate>
-
-        {teamStore.isLeader && (
-          <div>
-            <Plate>
-              <Typography variant="h5">Приглашения</Typography>
-              {teamStore.invitations.length > 0 ? (
-                <s.ListWrapper>
-                  <List
-                    data={listMapper(teamStore.invitations, "userName")}
-                    icon={<CloseIcon />}
-                    onClick={handleDeleteInvitation}
-                  />
-                </s.ListWrapper>
-              ) : (
-                <Typography variant="h6">Нет приглашений</Typography>
+              {teamStore.leader && teamStore.isMyTeam && (
+                <QuitTeam isLeader={teamStore.isLeader} />
               )}
+            </s.InfoWrapper>
+          </Plate>
+          <s.TeamInfoContainer>
+            <Plate>
+              <s.TeamTitleWrapper>
+                <Typography variant="h5">Участники</Typography>
+                <Typography>
+                  {teamStore.membersCount}/{teamStore.settings.maxTeamSize}
+                </Typography>
+              </s.TeamTitleWrapper>
+              <List data={listMapper(teamStore.team, "username")} />
             </Plate>
 
-            <Plate>
-              <Typography variant="h5">Пригласить участника</Typography>
-              {teamStore.isTeamFull ? (
-                <Typography variant="h6">Команда заполнена</Typography>
-              ) : (
-                <>
-                  <TextField
-                    label="Имя"
-                    variant="standard"
-                    fullWidth
-                    value={username}
-                    onChange={(event) => {
-                      setUsername(event.target.value);
-                      handleSearch(event.target.value);
-                    }}
-                  />
-                  <s.ListWrapper>
-                    <List
-                      data={listMapper(teamStore.users, "username")}
-                      showSearch
-                      icon={<AddIcon />}
-                      onClick={handleInvite}
-                    />
-                  </s.ListWrapper>
-                </>
-              )}
-            </Plate>
-          </div>
-        )}
-      </s.TeamInfoContainer>
+            {teamStore.isLeader && (
+              <div>
+                <Plate>
+                  <Typography variant="h5">Приглашения</Typography>
+                  {teamStore.invitations.length > 0 ? (
+                    <s.ListWrapper>
+                      <List
+                        data={listMapper(teamStore.invitations, "userName")}
+                        icon={<CloseIcon />}
+                        onClick={handleDeleteInvitation}
+                      />
+                    </s.ListWrapper>
+                  ) : (
+                    <Typography variant="h6">Нет приглашений</Typography>
+                  )}
+                </Plate>
+
+                <Plate>
+                  <Typography variant="h5">Пригласить участника</Typography>
+                  {teamStore.isTeamFull ? (
+                    <Typography variant="h6">Команда заполнена</Typography>
+                  ) : (
+                    <>
+                      <TextField
+                        label="Имя"
+                        variant="standard"
+                        fullWidth
+                        value={username}
+                        onChange={(event) => {
+                          setUsername(event.target.value);
+                          handleSearch(event.target.value);
+                        }}
+                      />
+                      <s.ListWrapper>
+                        <List
+                          data={listMapper(teamStore.users, "username")}
+                          showSearch
+                          icon={<AddIcon />}
+                          onClick={handleInvite}
+                        />
+                      </s.ListWrapper>
+                    </>
+                  )}
+                </Plate>
+              </div>
+            )}
+          </s.TeamInfoContainer>
+        </>
+      )}
+
+      {!primaryLoad && (
+        <CenteredVH>
+          <CircularProgress />
+        </CenteredVH>
+      )}
     </>
   );
 };
