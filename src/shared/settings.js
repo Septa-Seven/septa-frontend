@@ -34,7 +34,7 @@ axiosInstance.interceptors.response.use(
         originalRequest._retry = true;
 
         try {
-          const response = await axios.post(apiUrls.refreshToken, {
+          const response = await axiosInstance.post(apiUrls.refreshToken, {
             refresh_token: refreshToken,
           });
 
@@ -46,10 +46,10 @@ axiosInstance.interceptors.response.use(
           }
         } catch (e) {
           Auth.deleteAccessToken();
-          // return document.location.assign("/login");
+          return document.location.assign("/login");
         }
       }
-      // return document.location.assign("/login");
+      return document.location.assign("/login");
     }
 
     throw error;

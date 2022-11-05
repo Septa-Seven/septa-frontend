@@ -4,6 +4,7 @@ const apiUrls = {
   leagues: "/api/matchmaking/leagues/",
   league: "/api/matchmaking/leagues/:id/",
   games: "/api/matchmaking/games/",
+  players: "/api/matchmaking/leagues/:id/top/",
 };
 
 export const getLeagues = async () => {
@@ -16,4 +17,8 @@ export const getLeague = async (id) => {
 
 export const getGames = async (id) => {
   return await axiosInstance.get(apiUrls.games, { params: { league_id: id } });
+};
+
+export const getPlayers = async (id) => {
+  return await axiosInstance.get(apiUrls.players.replace(":id", id));
 };

@@ -3,6 +3,8 @@ import * as s from "./styles";
 import { Typography } from "@mui/material";
 import { getDateString } from "../../../../utils/getDateString";
 import { useMemo } from "react";
+import { Link } from "react-router-dom";
+import { routes } from "../../../../shared/routes";
 
 export const League = ({ league }) => {
   const { start, end, active } = league;
@@ -18,7 +20,9 @@ export const League = ({ league }) => {
     <Plate noPadding>
       <s.Container>
         <s.TitleContainer>
-          <s.Name>{league.name}</s.Name>
+          <Link to={routes.leagueDetail.replace(":id", league.id)}>
+            <s.Name>{league.name}</s.Name>
+          </Link>
           <Typography>{status}</Typography>
         </s.TitleContainer>
 
