@@ -27,12 +27,15 @@ axiosInstance.interceptors.response.use(
   (response) => response,
   async (error) => {
     const originalRequest = error.config;
+    console.log(originalRequest);
     const refreshToken = Auth.getRefreshToken();
 
-    if (error.response.status === 401) {
+    if (
+      error.response.status === 401 &&
+      originalRequest.url !== "/api/auth/token/refresh/"
+    ) {
       if (refreshToken) {
         originalRequest._retry = true;
-
         try {
           const response = await axiosInstance.post(apiUrls.refreshToken, {
             refresh_token: refreshToken,
@@ -42,7 +45,7 @@ axiosInstance.interceptors.response.use(
             Auth.setRefreshToken(response.data);
             axios.defaults.headers.common["Authorization"] =
               "Bearer " + Auth.getAccessToken();
-            return axios(originalRequest);
+            return;
           }
         } catch (e) {
           Auth.deleteAccessToken();

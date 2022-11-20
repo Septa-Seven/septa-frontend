@@ -6,7 +6,8 @@ import * as s from "./styles";
 import { Link } from "react-router-dom";
 import { routes } from "../../shared/routes";
 import { Plate } from "../../components";
-import { Button } from "@mui/material";
+import { Button, Typography } from "@mui/material";
+import { getDateString } from "../../utils/getDateString";
 
 const ArticlesView = () => {
   const { articlesStore } = useStores();
@@ -17,7 +18,11 @@ const ArticlesView = () => {
 
   const articles = useMemo(() => {
     return articlesStore.articles.map((item) => {
-      const article = { title: item.title, id: item.id };
+      const article = {
+        title: item.title,
+        id: item.id,
+        createdAt: item.createdAt,
+      };
       article.blocks = item.body.blocks.map((block) => {
         if (blockParser.has(block.type)) {
           const parsedBlock = blockParser.get(block.type);
@@ -50,11 +55,16 @@ const ArticlesView = () => {
                 ))}
               </s.BlocksContainer>
 
-              <Link to={routes.article.replace(":id", article.id)}>
-                <Button variant="contained" color="secondary">
-                  Подробнее
-                </Button>
-              </Link>
+              <s.BottomContainer>
+                <Link to={routes.article.replace(":id", article.id)}>
+                  <Button variant="contained" color="secondary">
+                    Подробнее
+                  </Button>
+                </Link>
+                <Typography fontWeight="bold">
+                  {getDateString(new Date(article.createdAt))}
+                </Typography>
+              </s.BottomContainer>
             </s.Article>
           </Plate>
         );

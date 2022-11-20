@@ -1,5 +1,4 @@
 export const getDateString = (date) => {
-  console.log(date);
   let options = {
     year: "numeric",
     month: "numeric",

@@ -22,3 +22,9 @@ export const Article = styled.div`
   margin: 0 auto;
   padding: 10px;
 `;
+
+export const BottomContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+`;

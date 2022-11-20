@@ -17,7 +17,6 @@ export class LeaguesStore {
 
   async getLeagues() {
     const { data } = await getLeagues();
-    console.log(data, "asdasd");
     this.leagues = data;
   }
 
@@ -33,7 +32,6 @@ export class LeaguesStore {
 
   async getPlayers(id) {
     const { data } = await getPlayers(id);
-    console.log(data);
     this.players = data;
   }
 }

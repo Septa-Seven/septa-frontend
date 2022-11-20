@@ -8,10 +8,11 @@ import * as s from "./styles";
 import { observer } from "mobx-react-lite";
 import { useRef, useState } from "react";
 import { useStores } from "../../StoreProvider";
-import { Popover } from "@mui/material";
+import { Popover, Tooltip } from "@mui/material";
 import { routes } from "../../shared/routes";
 import { useNavigate } from "react-router";
 import { LoadingButton } from "@mui/lab";
+import { cutString } from "../../utils/cutString";
 
 const NavbarView = () => {
   const [isShowMenu, setIsShowMenu] = useState(false);
@@ -53,17 +54,20 @@ const NavbarView = () => {
               </Typography>
               {authStore.accessToken ? (
                 <>
-                  <LoadingButton
-                    color="secondary"
-                    variant="contained"
-                    loading={!profileStore.username}
-                    onClick={() => {
-                      setIsShowMenu(true);
-                    }}
-                    ref={dropDownRef}
-                  >
-                    {profileStore.username.substring(0, 10) || "loading..."}
-                  </LoadingButton>
+                  <Tooltip title={profileStore.username}>
+                    <LoadingButton
+                      color="secondary"
+                      variant="contained"
+                      loading={!profileStore.username}
+                      onClick={() => {
+                        setIsShowMenu(true);
+                      }}
+                      ref={dropDownRef}
+                      title={profileStore.username}
+                    >
+                      {cutString(profileStore.username, 10) || "loading..."}
+                    </LoadingButton>
+                  </Tooltip>
 
                   <Popover
                     open={isShowMenu}
