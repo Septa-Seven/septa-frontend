@@ -1,6 +1,11 @@
 import TableRow from "@mui/material/TableRow";
 import styled from "styled-components";
 
+export const Container = styled.div`
+  max-width: 900px;
+  margin: 0 auto;
+`;
+
 export const HeaderContainer = styled.div`
   margin-bottom: 20px;
   display: flex;
@@ -23,6 +28,7 @@ export const IconContainer = styled.div`
 export const ConnectToLeague = styled.div`
   margin-bottom: 30px;
   display: flex;
+  gap: 10px;
   align-items: center;
 `;
 
