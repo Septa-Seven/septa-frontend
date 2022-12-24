@@ -6,3 +6,4 @@ export { Plate } from "./Plate";
 export { List } from "./List";
 export { CopyText } from "./CopyText";
 export { ProgressBar } from "./ProgressBar";
+export { LinkContainer } from "./LinkContainer";

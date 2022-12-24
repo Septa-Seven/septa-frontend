@@ -8,12 +8,19 @@ import Table from "@mui/material/Table";
 import TableCell from "@mui/material/TableCell";
 import TableBody from "@mui/material/TableBody";
 import * as s from "./styles";
-import { CenteredVH, CopyText, ProgressBar } from "../../components";
+import {
+  CenteredVH,
+  CopyText,
+  LinkContainer,
+  ProgressBar,
+} from "../../components";
 import { getLeagueProgressBarPercent } from "../../utils/getLeagueProgressBarPercent";
 import { getDateString } from "../../utils/getDateString";
 import AllInclusiveIcon from "@mui/icons-material/AllInclusive";
 import PersonIcon from "@mui/icons-material/Person";
 import PlayArrowRoundedIcon from "@mui/icons-material/PlayArrowRounded";
+import { Link } from "react-router-dom";
+import { routes } from "../../shared/routes";
 
 const LeagueDetailView = () => {
   const { leaguesStore } = useStores();
@@ -112,7 +119,13 @@ const LeagueDetailView = () => {
                         <Typography fontWeight="bold">{count + 1}</Typography>
                       </TableCell>
                       <TableCell align="left">
-                        <Typography fontWeight="bold">{name}</Typography>
+                        <Typography fontWeight="bold">
+                          <LinkContainer>
+                            <Link to={routes.team.replace(":id", id)}>
+                              {name}
+                            </Link>
+                          </LinkContainer>
+                        </Typography>
                       </TableCell>
                       <TableCell align="center">
                         <Typography fontWeight="bold">
