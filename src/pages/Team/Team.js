@@ -83,7 +83,10 @@ const TeamView = () => {
                   {teamStore.membersCount}/{teamStore.settings.maxTeamSize}
                 </Typography>
               </s.TeamTitleWrapper>
-              <List data={listMapper(teamStore.team, "username")} />
+
+              <s.ListWrapper>
+                <List data={listMapper(teamStore.team, "username")} />
+              </s.ListWrapper>
             </Plate>
 
             {teamStore.isLeader && (
