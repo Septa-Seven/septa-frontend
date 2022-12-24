@@ -6,6 +6,7 @@ import { blockParser } from "../../services/blockParser";
 import * as s from "../Articles/styles";
 import { Typography } from "@mui/material";
 import { Plate } from "../../components";
+import { getDateString } from "../../utils/getDateString";
 
 export const ArticleView = () => {
   const { id } = useParams();
@@ -17,7 +18,10 @@ export const ArticleView = () => {
 
   const article = useMemo(() => {
     if (articlesStore.article) {
-      const article = { title: articlesStore.article.title };
+      const article = {
+        title: articlesStore.article.title,
+        createdAt: articlesStore.article.createdAt,
+      };
       article.blocks = articlesStore.article.body.blocks.map((block) => {
         if (blockParser.has(block.type)) {
           const parsedBlock = blockParser.get(block.type);
@@ -34,6 +38,10 @@ export const ArticleView = () => {
         <s.Article>
           {article && (
             <>
+              <Typography variant="body2">
+                {getDateString(new Date(article.createdAt))}
+              </Typography>
+
               <Typography variant="h4" fontWeight="bold" marginBottom="24px">
                 {article.title}
               </Typography>

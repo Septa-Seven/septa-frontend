@@ -40,6 +40,9 @@ const ArticlesView = () => {
           <Plate key={index}>
             <s.Article>
               <s.BlocksContainer>
+                <Typography variant="body2">
+                  {getDateString(new Date(article.createdAt))}
+                </Typography>
                 <s.LinkContainer
                   variant="h4"
                   fontWeight="bold"
@@ -55,16 +58,11 @@ const ArticlesView = () => {
                 ))}
               </s.BlocksContainer>
 
-              <s.BottomContainer>
-                <Link to={routes.article.replace(":id", article.id)}>
-                  <Button variant="contained" color="secondary">
-                    Подробнее
-                  </Button>
-                </Link>
-                <Typography fontWeight="bold">
-                  {getDateString(new Date(article.createdAt))}
-                </Typography>
-              </s.BottomContainer>
+              <Link to={routes.article.replace(":id", article.id)}>
+                <Button variant="contained" color="secondary">
+                  Подробнее
+                </Button>
+              </Link>
             </s.Article>
           </Plate>
         );
