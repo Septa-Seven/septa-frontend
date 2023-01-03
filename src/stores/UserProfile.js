@@ -1,5 +1,6 @@
 import { makeAutoObservable } from "mobx";
 import { getProfileInfo } from "../modules/profile/api";
+import { toast } from "react-hot-toast";
 
 export class UserProfile {
   userId = undefined;
@@ -17,7 +18,7 @@ export class UserProfile {
       this.userId = data.id;
       this.teamId = data.teamId;
     } catch (e) {
-      console.log(e);
+      toast.error(e.response.data.detail, { position: "bottom-right" });
     }
   }
 }

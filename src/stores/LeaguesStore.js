@@ -5,6 +5,7 @@ import {
   getLeagues,
   getPlayers,
 } from "../modules/leagues/api";
+import { toast } from "react-hot-toast";
 
 export class LeaguesStore {
   leagues = [];
@@ -16,22 +17,38 @@ export class LeaguesStore {
   }
 
   async getLeagues() {
-    const { data } = await getLeagues();
-    this.leagues = data;
+    try {
+      const { data } = await getLeagues();
+      this.leagues = data;
+    } catch (e) {
+      toast.error(e.response.data.detail, { position: "bottom-right" });
+    }
   }
 
   async getLeague(id) {
-    const { data } = await getLeague(id);
-    this.league = data;
+    try {
+      const { data } = await getLeague(id);
+      this.league = data;
+    } catch (e) {
+      toast.error(e.response.data.detail, { position: "bottom-right" });
+    }
   }
 
   async getGames(id) {
-    const { data } = await getGames(id);
-    this.connectUrl = data.connectUrl;
+    try {
+      const { data } = await getGames(id);
+      this.connectUrl = data.connectUrl;
+    } catch (e) {
+      toast.error(e.response.data.detail, { position: "bottom-right" });
+    }
   }
 
   async getPlayers(id) {
-    const { data } = await getPlayers(id);
-    this.players = data;
+    try {
+      const { data } = await getPlayers(id);
+      this.players = data;
+    } catch (e) {
+      toast.error(e.response.data.detail, { position: "bottom-right" });
+    }
   }
 }

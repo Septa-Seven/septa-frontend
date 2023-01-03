@@ -1,5 +1,6 @@
 import { makeAutoObservable } from "mobx";
 import { getArticle, getArticles } from "../modules/news/api";
+import { toast } from "react-hot-toast";
 
 export class ArticlesStore {
   articles = [];
@@ -14,7 +15,7 @@ export class ArticlesStore {
       const { data } = await getArticles();
       this.articles = data.results;
     } catch (e) {
-      console.log(e);
+      toast.error(e.response.data.detail, { position: "bottom-right" });
     }
   }
 
@@ -23,7 +24,7 @@ export class ArticlesStore {
       const { data } = await getArticle(id);
       this.article = data;
     } catch (e) {
-      console.log(e);
+      toast.error(e.response.data.detail, { position: "bottom-right" });
     }
   }
 }

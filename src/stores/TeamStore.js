@@ -41,7 +41,6 @@ export class TeamStore {
     } catch (error) {
       error.response.data.detail &&
         toast.error(error.response.data.detail, { position: "bottom-right" });
-      this.errors = error.response.data;
     }
   }
 
@@ -64,7 +63,7 @@ export class TeamStore {
       const { data } = await getTeamSettings();
       this.settings.maxTeamSize = data.maxTeamSize;
     } catch (e) {
-      console.log(e);
+      toast.error(e.response.data.detail, { position: "bottom-right" });
     }
   }
 
@@ -85,7 +84,7 @@ export class TeamStore {
       const { data } = await getUsers(username, hasTeam);
       this.users = data.results;
     } catch (e) {
-      console.log(e);
+      toast.error(e.response.data.detail, { position: "bottom-right" });
     }
   }
 
@@ -94,7 +93,7 @@ export class TeamStore {
       const { data } = await getInvitations();
       this.invitations = data.results;
     } catch (e) {
-      console.log(e);
+      toast.error(e.response.data.detail, { position: "bottom-right" });
     }
   }
 
@@ -105,20 +104,36 @@ export class TeamStore {
   }
 
   async inviteUser(userId) {
-    await createInvitation(userId);
+    try {
+      await createInvitation(userId);
+    } catch (e) {
+      toast.error(e.response.data.detail, { position: "bottom-right" });
+    }
   }
 
   async deleteUserInvitations(id) {
-    await deleteUserInvitation(id);
+    try {
+      await deleteUserInvitation(id);
+    } catch (e) {
+      toast.error(e.response.data.detail, { position: "bottom-right" });
+    }
   }
 
   async getUserInvitations() {
-    const { data } = await getUserInvitations();
-    this.userInvitations = data.results;
+    try {
+      const { data } = await getUserInvitations();
+      this.userInvitations = data.results;
+    } catch (e) {
+      toast.error(e.response.data.detail, { position: "bottom-right" });
+    }
   }
 
   async deleteTeam() {
-    await deleteTeam();
-    this.rootStore.profileStore.teamId = null;
+    try {
+      await deleteTeam();
+      this.rootStore.profileStore.teamId = null;
+    } catch (e) {
+      toast.error(e.response.data.detail, { position: "bottom-right" });
+    }
   }
 }
